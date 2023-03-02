@@ -2,5 +2,5 @@
 publish: false
 ---
 
-        > [!info]
+> [!info]
 > This is the information

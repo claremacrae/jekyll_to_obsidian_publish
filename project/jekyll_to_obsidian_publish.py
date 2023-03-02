@@ -22,7 +22,7 @@ class PageConverter:
 publish: false
 ---
 
-        """ + content
+""" + content
 
         table_of_contents = """
 <details open markdown="block">
