@@ -18,7 +18,14 @@ class PageConverter:
         self.write_file(destination_path, content)
 
     def convert_content(self, source_path: str, content: str) -> str:
+        content = self.update_front_matter(content, source_path)
+        content = self.convert_tables_of_contents(content)
+        content = self.convert_callouts(content)
+        content = self.convert_internal_links(content)
 
+        return content
+
+    def update_front_matter(self, content: str, source_path: str) -> str:
         # Hide the README.md from Publish, with frontmatter
         if source_path == './README.md':
             content = """---
@@ -26,11 +33,6 @@ publish: false
 ---
 
 """ + content
-
-        content = self.convert_tables_of_contents(content)
-        content = self.convert_callouts(content)
-        content = self.convert_internal_links(content)
-
         return content
 
     def convert_tables_of_contents(self, content: str) -> str:
