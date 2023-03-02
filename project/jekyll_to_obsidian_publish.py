@@ -2,6 +2,9 @@ import os.path
 import re
 from os import walk
 from os.path import join
+from typing import List
+
+StringReplacements = List[List[str]]
 
 
 class PageConverter:
@@ -39,7 +42,7 @@ publish: false
 {table_of_contents}
 ---'''
 
-        replacements = [
+        replacements: StringReplacements = [
             ['{: .info }', '> [!info]'],
             ['{: .released }', '> [!success] Released'],
             ['{: .warning }', '> [!warning]'],
