@@ -12,6 +12,14 @@ def convert_file(file: str, source_path: str, destination_path: str) -> None:
     with open(source_path) as f:
         content = f.read()
 
+    # Hide the README.md from Publish, with frontmatter
+    if source_path == './README.md':
+        content = """---
+publish: false
+---
+
+""" + content
+
     content = convert_content(content)
 
     from pathlib import Path
