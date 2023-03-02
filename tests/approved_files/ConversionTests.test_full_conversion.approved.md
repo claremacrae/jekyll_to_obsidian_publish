@@ -222,6 +222,6 @@ Subsequently, the custom statuses implementation in Tasks has diverged from the 
 > This is a test warning
 
 2 links on one line:
-Urgency can only consider the parameters it knows: [[getting-started/priority|dates]({{ site.baseurl }}{% link getting-started/dates.md %}) and [priorities]].
+Urgency can only consider the parameters it knows: [[getting-started/dates|dates]] and [[getting-started/priority|priorities]].
 
-Or you can read about [[getting-started/statuses/editing-a-status|Status Settings]({{ site.baseurl }}{% link getting-started/statuses/status-settings.md %}), and see how to [edit a Status]].
+Or you can read about [[getting-started/statuses/status-settings|Status Settings]], and see how to [[getting-started/statuses/editing-a-status|edit a Status]].
