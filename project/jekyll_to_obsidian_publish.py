@@ -7,6 +7,7 @@ from typing import List, Tuple, Any, Dict
 import frontmatter
 
 StringReplacements = List[List[str]]
+MetaData = Dict[str, Any]
 
 
 class PageConverter:
@@ -20,21 +21,45 @@ class PageConverter:
         self.write_file(destination_path, content)
 
     def convert_content(self, source_path: str, content: str) -> str:
-        content, metadata = self.update_and_return_front_matter(content, source_path)
+        content, original_metadata = self.update_and_return_front_matter(content, source_path)
         content = self.convert_tables_of_contents(content)
         content = self.convert_callouts(content)
         content = self.convert_internal_links(content)
 
         return content
 
-    def update_and_return_front_matter(self, content: str, source_path: str) -> Tuple[str, Dict[str, Any]]:
+    def update_and_return_front_matter(self, content: str, source_path: str) -> Tuple[str, MetaData]:
+        """
+        Updates the front matter, and then returns the original from before updating,
+        as it will be useful for later steps in the conversion.
+
+        :param content: The current content of the file
+        :param source_path: The location of the original file
+        """
         metadata = frontmatter.loads(content)
+        original_metadata = metadata.to_dict()
 
-        # Hide the README.md from Publish, with frontmatter
+        unwanted_keys = [
+            'grand_parent',
+            'has_children',
+            'has_toc',
+            'layout',
+            'nav_order',
+            'parent',
+            'title',
+        ]
+        for key in unwanted_keys:
+            if key in metadata:
+                metadata.__delitem__(key)
+
         if source_path == './README.md':
+            # Hide the README.md from Publish, with frontmatter.
             metadata['publish'] = False
+        else:
+            # Make sure Publish picks up all other files.
+            metadata['publish'] = True
 
-        return frontmatter.dumps(metadata), metadata.to_dict()
+        return frontmatter.dumps(metadata), original_metadata
 
     def convert_tables_of_contents(self, content: str) -> str:
         table_of_contents = """
