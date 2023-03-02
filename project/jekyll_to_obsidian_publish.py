@@ -14,7 +14,8 @@ def convert_file(file: str, absolute_path: str) -> None:
 
 def convert_content(content: str) -> str:
     replacements = [
-        ['{: .info }', '> [!info]']
+        ['{: .info }', '> [!info]'],
+        ['{: .released }', '> [!success] Released']
     ]
     for replacement in replacements:
         content = content.replace(replacement[0], replacement[1])
