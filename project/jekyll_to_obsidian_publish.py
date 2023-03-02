@@ -4,7 +4,7 @@ from os import walk
 from os.path import join
 
 
-def convert_file(file: str, source_path: str, destination_path: str) -> None:
+def convert_file(source_path: str, destination_path: str) -> None:
     if source_path == './migration.md':
         print(f'    Skipping {source_path}')
         return
@@ -76,7 +76,6 @@ def walk_tree(source: str, destination: str) -> None:
         :param destination: output path, where the converted files are saved to. 
     """
 
-    # Loop through the files
     for root, dirs, files in walk(source, topdown=True):
         # Exclude directories and files
         dirs[:] = [d for d in dirs if d not in ['_site']]
@@ -84,17 +83,13 @@ def walk_tree(source: str, destination: str) -> None:
         # files[:] = [f for f in files if f not in FILES_TO_EXCLUDE]
         files.sort()
 
-        # Loop through the files
         for file in files:
-            # We only care about markdown files
-            # Note: Alternative implementation is to use os.splitext;
-            # both work for this usecase
             if file.endswith(".md"):
                 source_path = join(root, file)
                 destination_path = join(destination, source_path)
                 destination_path = os.path.normpath(destination_path)
                 print(destination_path)
-                convert_file(file, source_path, destination_path)
+                convert_file(source_path, destination_path)
 
 
 def convert_markdown() -> None:
