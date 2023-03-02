@@ -10,8 +10,7 @@ class PageConverter:
             print(f'    Skipping {source_path}')
             return
 
-        with open(source_path) as f:
-            content = f.read()
+        content = self.read_file(source_path)
 
         # Hide the README.md from Publish, with frontmatter
         if source_path == './README.md':
@@ -67,6 +66,11 @@ publish: false
 
     def should_skip_file(self, source_path: str) -> bool:
         return source_path == './migration.md'
+
+    def read_file(self, source_path: str) -> str:
+        with open(source_path) as f:
+            content = f.read()
+        return content
 
 
 class SiteConverter:
