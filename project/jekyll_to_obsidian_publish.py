@@ -66,34 +66,39 @@ def convert_content(content: str) -> str:
     return '\n'.join(lines)
 
 
-def walk_tree(source: str, destination: str) -> None:
-    """
-    Walks through the filetree rooted at `root`.
-    For each markdown file that it finds, it replaces a particular comment line with the corresponding template.
-    Parameters:
-        top_directory: path from which this method should run. Generally: root of the hub.
-        :param source: path from which this method should run. Generally the project's documentation folder.
-        :param destination: output path, where the converted files are saved to. 
-    """
+class SiteConverter:
+    def __init__(self, source: str, destination: str) -> None:
+        self.source = source
+        self.destination = destination
 
-    for root, dirs, files in walk(source, topdown=True):
-        # Exclude directories and files
-        dirs[:] = [d for d in dirs if d not in ['_site']]
-        dirs.sort()
-        # files[:] = [f for f in files if f not in FILES_TO_EXCLUDE]
-        files.sort()
+    def convert(self) -> None:
+        """
+        Walks through the filetree rooted at `root`.
+        For each markdown file that it finds, it replaces a particular comment line with the corresponding template.
+        Parameters:
+            top_directory: path from which this method should run. Generally: root of the hub.
+            :param source: path from which this method should run. Generally the project's documentation folder.
+            :param destination: output path, where the converted files are saved to. 
+        """
 
-        for file in files:
-            if file.endswith(".md"):
-                source_path = join(root, file)
-                destination_path = join(destination, source_path)
-                destination_path = os.path.normpath(destination_path)
-                print(destination_path)
-                convert_file(source_path, destination_path)
+        for root, dirs, files in walk(self.source, topdown=True):
+            # Exclude directories and files
+            dirs[:] = [d for d in dirs if d not in ['_site']]
+            dirs.sort()
+            # files[:] = [f for f in files if f not in FILES_TO_EXCLUDE]
+            files.sort()
 
+            for file in files:
+                if file.endswith(".md"):
+                    source_path = join(root, file)
+                    destination_path = join(self.destination, source_path)
+                    destination_path = os.path.normpath(destination_path)
+                    print(destination_path)
+                    convert_file(source_path, destination_path)
 
 def convert_markdown() -> None:
-    walk_tree('.', '../docsv2')
+    site_converter = SiteConverter('.', '../docsv2')
+    site_converter.convert()
 
 
 if __name__ == '__main__':
