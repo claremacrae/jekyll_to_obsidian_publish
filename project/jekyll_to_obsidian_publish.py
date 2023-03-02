@@ -56,7 +56,8 @@ class PageConverter:
             # Make sure Publish picks up all other files.
             metadata['publish'] = True
 
-        return frontmatter.dumps(metadata)
+        # Reinstate original end-of-line that frontmatter removes
+        return frontmatter.dumps(metadata) + '\n'
 
     def convert_tables_of_contents(self, content: str) -> str:
         table_of_contents = """
