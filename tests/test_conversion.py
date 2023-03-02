@@ -8,6 +8,8 @@ from approvaltests import Options, verify_as_json
 # from approvaltests.reporters.generic_diff_reporter_factory import GenericDiffReporterFactory
 # from approvaltests import set_default_reporter
 
+from project.jekyll_to_obsidian_publish import convert_content
+
 
 class ConversionTests(unittest.TestCase):
     def setUp(self) -> None:
@@ -16,17 +18,19 @@ class ConversionTests(unittest.TestCase):
         # self.reporter = GenericDiffReporterFactory().get("DiffMerge")
         # Download DiffMerge at https://sourcegear.com/diffmerge/
 
-    def test_(self) -> None:
-        self.assertEqual(5, 5)
-
     def test_info_conversion(self) -> None:
-        from project.jekyll_to_obsidian_publish import convert_content
         input = f'''{{: .info }}
 > This is the information
 '''
         options = Options().for_file.with_extension(".md")
         verify(convert_content(input), options = options)
 
+    def test_full_conversion(self) -> None:
+        with open('sample_jekyll_document.md') as f:
+            content = f.read()
+        options = Options().for_file.with_extension(".md")
+        # Initially, just a straight saving of the input file, for comparison
+        verify(content, options = options)
 
 # def test_pytest() -> None:
 #     assert True
