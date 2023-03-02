@@ -6,7 +6,7 @@ from os.path import join
 
 class PageConverter:
     def convert_file(self, source_path: str, destination_path: str) -> None:
-        if source_path == './migration.md':
+        if self.should_skip_file(source_path):
             print(f'    Skipping {source_path}')
             return
 
@@ -64,6 +64,9 @@ publish: false
             lines[i] = p.sub(r'[[\2\3|\1]]', line)
 
         return '\n'.join(lines)
+
+    def should_skip_file(self, source_path: str) -> bool:
+        return source_path == './migration.md'
 
 
 class SiteConverter:
