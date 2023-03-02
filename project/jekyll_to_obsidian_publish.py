@@ -21,12 +21,17 @@ class PageConverter:
         self.write_file(destination_path, content)
 
     def convert_content(self, source_path: str, content: str) -> str:
-        content, original_metadata = self.update_and_return_front_matter(content, source_path)
+        original_metadata = self.extract_front_matter(content)
+        content, _ = self.update_and_return_front_matter(content, source_path)
         content = self.convert_tables_of_contents(content)
         content = self.convert_callouts(content)
         content = self.convert_internal_links(content)
 
         return content
+
+    def extract_front_matter(self, content: str) -> MetaData:
+        metadata = frontmatter.loads(content)
+        return metadata.to_dict()
 
     def update_and_return_front_matter(self, content: str, source_path: str) -> Tuple[str, MetaData]:
         """
