@@ -22,10 +22,7 @@ publish: false
 
         content = self.convert_content(content)
 
-        from pathlib import Path
-        Path(os.path.dirname(destination_path)).mkdir(parents=True, exist_ok=True)
-        with open(destination_path, 'w') as f:
-            f.write(content)
+        self.write_file(destination_path, content)
 
     def convert_content(self, content: str) -> str:
 
@@ -71,6 +68,12 @@ publish: false
         with open(source_path) as f:
             content = f.read()
         return content
+
+    def write_file(self, destination_path: str, content: str) -> None:
+        from pathlib import Path
+        Path(os.path.dirname(destination_path)).mkdir(parents=True, exist_ok=True)
+        with open(destination_path, 'w') as f:
+            f.write(content)
 
 
 class SiteConverter:
