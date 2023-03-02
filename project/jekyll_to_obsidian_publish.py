@@ -35,8 +35,7 @@ def convert_content(content: str) -> str:
 
     table_of_contents_plus_rule = f'''
 {table_of_contents}
----
-'''
+---'''
 
     replacements = [
         ['{: .info }', '> [!info]'],
