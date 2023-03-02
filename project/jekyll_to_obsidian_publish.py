@@ -1,19 +1,22 @@
+import os.path
 import re
 from os import walk
 from os.path import join
 
 
-def convert_file(file: str, absolute_path: str) -> None:
-    if absolute_path == './migration.md':
-        print(f'    Skipping {absolute_path}')
+def convert_file(file: str, source_path: str, destination_path: str) -> None:
+    if source_path == './migration.md':
+        print(f'    Skipping {source_path}')
         return
 
-    with open(absolute_path) as f:
+    with open(source_path) as f:
         content = f.read()
 
     content = convert_content(content)
 
-    with open(absolute_path, 'w') as f:
+    from pathlib import Path
+    Path(os.path.dirname(destination_path)).mkdir(parents=True, exist_ok=True)
+    with open(destination_path, 'w') as f:
         f.write(content)
 
 
@@ -54,19 +57,20 @@ def convert_content(content: str) -> str:
     return content
 
 
-def walk_tree(top_directory: str) -> None:
+def walk_tree(source: str, destination: str) -> None:
     """
     Walks through the filetree rooted at `root`.
     For each markdown file that it finds, it replaces a particular comment line with the corresponding template.
     Parameters:
         top_directory: path from which this method should run. Generally: root of the hub.
-        :param top_directory: ath from which this method should run. Generally the project's documentation folder.
+        :param source: path from which this method should run. Generally the project's documentation folder.
+        :param destination: output path, where the converted files are saved to. 
     """
 
     # Loop through the files
-    for root, dirs, files in walk(top_directory, topdown=True):
+    for root, dirs, files in walk(source, topdown=True):
         # Exclude directories and files
-        # dirs[:] = [d for d in dirs if d not in DIRECTORIES_TO_EXCLUDE]
+        dirs[:] = [d for d in dirs if d not in ['_site']]
         dirs.sort()
         # files[:] = [f for f in files if f not in FILES_TO_EXCLUDE]
         files.sort()
@@ -77,13 +81,15 @@ def walk_tree(top_directory: str) -> None:
             # Note: Alternative implementation is to use os.splitext;
             # both work for this usecase
             if file.endswith(".md"):
-                absolute_path = join(root, file)
-                print(file, absolute_path)
-                convert_file(file, absolute_path)
+                source_path = join(root, file)
+                destination_path = join(destination, source_path)
+                destination_path = os.path.normpath(destination_path)
+                print(destination_path)
+                convert_file(file, source_path, destination_path)
 
 
 def convert_markdown() -> None:
-    walk_tree('.')
+    walk_tree('.', '../docsv2')
 
 
 if __name__ == '__main__':
