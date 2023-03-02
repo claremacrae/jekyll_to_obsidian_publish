@@ -1,5 +1,6 @@
 import unittest
 # import pytest
+from pathlib import Path
 
 from approvaltests.approvals import verify, verify_all
 
@@ -26,7 +27,8 @@ class ConversionTests(unittest.TestCase):
         verify(convert_content(input), options = options)
 
     def test_full_conversion(self) -> None:
-        with open('sample_jekyll_document.md') as f:
+        input_file = Path(__file__).with_name('sample_jekyll_document.md')
+        with open(input_file) as f:
             content = f.read()
         options = Options().for_file.with_extension(".md")
         # Initially, just a straight saving of the input file, for comparison
