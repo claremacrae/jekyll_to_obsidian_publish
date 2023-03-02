@@ -21,7 +21,9 @@ def convert_content(content: str) -> str:
         ['{: .info }', '> [!info]'],
         ['{: .released }', '> [!success] Released'],
         ['{: .warning }', '> [!warning]'],
-        ['{: .no_toc }\n', '']
+        ['{: .no_toc }\n', ''],
+        ['{{ site.baseurl }}{% link ', ''],
+        ['.md %}', ''],
     ]
     for replacement in replacements:
         content = content.replace(replacement[0], replacement[1])
