@@ -225,3 +225,8 @@ Where code in Tasks has been copied from 'Tasks SQL Powered', Sytone has been sp
 Subsequently, the custom statuses implementation in Tasks has diverged from the 'Tasks SQL Powered' significantly. However, none of the new features and fixes would have been possible without Sytone's foundation work, for which we are very grateful.
 
 [^task-x-version]: 'Tasks SQL Powered' as of [revision 2c0b659](https://github.com/sytone/obsidian-tasks-x/tree/2c0b659457cc80806ff18585c955496c76861b87) on 2 August 2022
+
+## Extra test samples
+
+> [!warning]
+> This is a test warning
