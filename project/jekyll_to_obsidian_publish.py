@@ -2,7 +2,9 @@ import os.path
 import re
 from os import walk
 from os.path import join
-from typing import List
+from typing import List, Tuple, Any, Dict
+
+import frontmatter
 
 StringReplacements = List[List[str]]
 
@@ -18,22 +20,21 @@ class PageConverter:
         self.write_file(destination_path, content)
 
     def convert_content(self, source_path: str, content: str) -> str:
-        content = self.update_front_matter(content, source_path)
+        content, metadata = self.update_and_return_front_matter(content, source_path)
         content = self.convert_tables_of_contents(content)
         content = self.convert_callouts(content)
         content = self.convert_internal_links(content)
 
         return content
 
-    def update_front_matter(self, content: str, source_path: str) -> str:
+    def update_and_return_front_matter(self, content: str, source_path: str) -> Tuple[str, Dict[str, Any]]:
+        metadata = frontmatter.loads(content)
+
         # Hide the README.md from Publish, with frontmatter
         if source_path == './README.md':
-            content = """---
-publish: false
----
+            metadata['publish'] = False
 
-""" + content
-        return content
+        return frontmatter.dumps(metadata), metadata.to_dict()
 
     def convert_tables_of_contents(self, content: str) -> str:
         table_of_contents = """
