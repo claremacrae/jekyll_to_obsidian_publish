@@ -49,7 +49,7 @@ def convert_content(content: str) -> str:
         content = content.replace(replacement[0], replacement[1])
 
     # TODO Convert hyphens in #.... (heading names) to spaces
-    p = re.compile(r'\[([^(){}]+)]\({{ site\.baseurl }}{% link ([a-z0-9-/]+)\.md %}(#[a-z-]+)?\)')
+    p = re.compile(r'\[([^{}]+)]\({{ site\.baseurl }}{% link ([a-z0-9-/]+)\.md %}(#[a-z-]+)?\)')
 
     lines = content.split('\n')
     for i, line in enumerate(lines):
