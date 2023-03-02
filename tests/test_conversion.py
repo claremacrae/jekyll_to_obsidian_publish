@@ -21,13 +21,14 @@ class ConversionTests(unittest.TestCase):
 > This is the information
 '''
         options = Options().for_file.with_extension(".md")
-        verify(converter.convert_content(input), options=options)
+        verify(converter.convert_content('./README.md', input), options=options)
 
     def test_full_conversion(self) -> None:
         converter = PageConverter()
 
-        input_file = Path(__file__).with_name('sample_jekyll_document.md')
+        filename = 'sample_jekyll_document.md'
+        input_file = Path(__file__).with_name(filename)
         with open(input_file) as f:
             content = f.read()
         options = Options().for_file.with_extension(".md")
-        verify(converter.convert_content(content), options=options)
+        verify(converter.convert_content(filename, content), options=options)
