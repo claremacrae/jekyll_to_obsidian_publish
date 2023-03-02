@@ -48,16 +48,18 @@ publish: false
         ]
         content = self.apply_replacements(content, replacements)
 
+        content = self.convert_callouts(content)
+        content = self.convert_internal_links(content)
+
+        return content
+
+    def convert_callouts(self, content: str) -> str:
         replacements: StringReplacements = [
             ['{: .info }', '> [!info]'],
             ['{: .released }', '> [!success] Released'],
             ['{: .warning }', '> [!warning]'],
         ]
-        content = self.apply_replacements(content, replacements)
-
-        content = self.convert_internal_links(content)
-
-        return content
+        return self.apply_replacements(content, replacements)
 
     def convert_internal_links(self, content: str) -> str:
         # TODO Convert hyphens in #.... (heading names) to spaces
