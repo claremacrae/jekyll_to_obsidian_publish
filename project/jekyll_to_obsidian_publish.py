@@ -3,6 +3,10 @@ from os.path import join
 
 
 def convert_file(file: str, absolute_path: str) -> None:
+    if absolute_path == './migration.md':
+        print(f'    Skipping {absolute_path}')
+        return
+
     with open(absolute_path) as f:
         content = f.read()
 
