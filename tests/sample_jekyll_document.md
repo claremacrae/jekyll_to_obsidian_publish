@@ -244,3 +244,5 @@ Subsequently, the custom statuses implementation in Tasks has diverged from the 
 
 2 links on one line:
 Urgency can only consider the parameters it knows: [dates]({{ site.baseurl }}{% link getting-started/dates.md %}) and [priorities]({{ site.baseurl }}{% link getting-started/priority.md %}).
+
+Or you can read about [Status Settings]({{ site.baseurl }}{% link getting-started/statuses/status-settings.md %}), and see how to [edit a Status]({{ site.baseurl }}{% link getting-started/statuses/editing-a-status.md %}).
