@@ -68,6 +68,13 @@ def convert_content(content: str) -> str:
 
 class SiteConverter:
     def __init__(self, source: str, destination: str) -> None:
+        """
+        Class to copy a directory of markdown Jekyll docs, and output a directory for use with Obsidian Publish.
+        Parameters:
+            top_directory: path from which this method should run. Generally: root of the hub.
+            :param source: path from which this method should run. Generally the project's documentation folder.
+            :param destination: output path, where the converted files are saved to. 
+        """
         self.source = source
         self.destination = destination
 
@@ -75,10 +82,6 @@ class SiteConverter:
         """
         Walks through the filetree rooted at `root`.
         For each markdown file that it finds, it replaces a particular comment line with the corresponding template.
-        Parameters:
-            top_directory: path from which this method should run. Generally: root of the hub.
-            :param source: path from which this method should run. Generally the project's documentation folder.
-            :param destination: output path, where the converted files are saved to. 
         """
 
         for root, dirs, files in walk(self.source, topdown=True):
