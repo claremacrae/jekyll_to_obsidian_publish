@@ -41,14 +41,17 @@ publish: false
         table_of_contents_plus_rule = f'''
 {table_of_contents}
 ---'''
+        replacements: StringReplacements = [
+            ['{: .no_toc }\n', ''],
+            [table_of_contents_plus_rule, ''],
+            [table_of_contents, ''],
+        ]
+        content = self.apply_replacements(content, replacements)
 
         replacements: StringReplacements = [
             ['{: .info }', '> [!info]'],
             ['{: .released }', '> [!success] Released'],
             ['{: .warning }', '> [!warning]'],
-            ['{: .no_toc }\n', ''],
-            [table_of_contents_plus_rule, ''],
-            [table_of_contents, ''],
         ]
         content = self.apply_replacements(content, replacements)
 
