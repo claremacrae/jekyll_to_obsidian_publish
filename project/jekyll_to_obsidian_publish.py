@@ -73,7 +73,7 @@ class SiteConverter:
         Parameters:
             top_directory: path from which this method should run. Generally: root of the hub.
             :param source: path from which this method should run. Generally the project's documentation folder.
-            :param destination: output path, where the converted files are saved to. 
+            :param destination: output path, where the converted files are saved to.
         """
         self.source = source
         self.destination = destination
@@ -98,6 +98,7 @@ class SiteConverter:
                     destination_path = os.path.normpath(destination_path)
                     print(destination_path)
                     convert_file(source_path, destination_path)
+
 
 def convert_markdown() -> None:
     site_converter = SiteConverter('.', '../docsv2')
