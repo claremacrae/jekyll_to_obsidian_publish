@@ -30,7 +30,7 @@ class ConversionTests(unittest.TestCase):
             content = f.read()
         options = Options().for_file.with_extension(".md")
         # Initially, just a straight saving of the input file, for comparison
-        verify(content, options = options)
+        verify(convert_content(content), options = options)
 
 # def test_pytest() -> None:
 #     assert True
