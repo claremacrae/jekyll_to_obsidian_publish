@@ -21,6 +21,18 @@ has_children: true
 
 ---
 
+
+## Another heading block, this time with no horizontal rule
+
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+1. TOC
+{:toc}
+</details>
+
 ## Introduction
 
 {: .released }

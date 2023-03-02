@@ -18,11 +18,30 @@ def convert_file(file: str, absolute_path: str) -> None:
 
 
 def convert_content(content: str) -> str:
+
+    table_of_contents = """
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+1. TOC
+{:toc}
+</details>
+"""
+
+    table_of_contents_plus_rule = f'''
+{table_of_contents}
+---
+'''
+
     replacements = [
         ['{: .info }', '> [!info]'],
         ['{: .released }', '> [!success] Released'],
         ['{: .warning }', '> [!warning]'],
         ['{: .no_toc }\n', ''],
+        [table_of_contents_plus_rule, ''],
+        [table_of_contents, ''],
     ]
     for replacement in replacements:
         content = content.replace(replacement[0], replacement[1])

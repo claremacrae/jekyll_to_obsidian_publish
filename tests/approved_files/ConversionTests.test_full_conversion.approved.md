@@ -9,16 +9,7 @@ has_children: true
 
 # Statuses
 
-<details open markdown="block">
-  <summary>
-    Table of contents
-  </summary>
-  {: .text-delta }
-1. TOC
-{:toc}
-</details>
-
----
+## Another heading block, this time with no horizontal rule
 
 ## Introduction
 
