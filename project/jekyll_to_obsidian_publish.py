@@ -51,9 +51,12 @@ def convert_content(content: str) -> str:
     # TODO Fix this for cases where there are multiple links on one line.
     # TODO Convert hyphens in #.... (heading names) to spaces
     p = re.compile(r'\[(.+)]\({{ site\.baseurl }}{% link ([^ ]+)\.md %}(#[a-z-]+)?\)')
-    content = p.sub(r'[[\2\3|\1]]', content)
 
-    return content
+    lines = content.split('\n')
+    for i, line in enumerate(lines):
+        lines[i] = p.sub(r'[[\2\3|\1]]', line)
+
+    return '\n'.join(lines)
 
 
 def walk_tree(source: str, destination: str) -> None:
