@@ -21,7 +21,6 @@ has_children: true
 
 ---
 
-
 ## Another heading block, this time with no horizontal rule
 
 <details open markdown="block">

@@ -8,7 +8,6 @@ has_children: true
 ---
 
 # Statuses
-
 ## Another heading block, this time with no horizontal rule
 
 ## Introduction
