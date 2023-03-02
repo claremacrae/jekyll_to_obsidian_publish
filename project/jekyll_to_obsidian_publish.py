@@ -27,8 +27,8 @@ def convert_content(content: str) -> str:
     for replacement in replacements:
         content = content.replace(replacement[0], replacement[1])
 
-    p = re.compile('\[(.*)]\({{ site.baseurl }}{% link ([^ ]+)\.md %}\)')
-    content = p.sub('[[\\2|\\1]]', content)
+    p = re.compile('\[(.*)]\({{ site.baseurl }}{% link ([^ ]+)\.md %}(#[a-z-]+)?\)')
+    content = p.sub('[[\\2\\3|\\1]]', content)
 
     return content
 
