@@ -225,3 +225,5 @@ Subsequently, the custom statuses implementation in Tasks has diverged from the 
 Urgency can only consider the parameters it knows: [[getting-started/dates|dates]] and [[getting-started/priority|priorities]].
 
 Or you can read about [[getting-started/statuses/status-settings|Status Settings]], and see how to [[getting-started/statuses/editing-a-status|edit a Status]].
+
+See [recurring tasks (repetition)]({{ site.baseurl }}{% link getting-started/recurring-tasks.md %}).
