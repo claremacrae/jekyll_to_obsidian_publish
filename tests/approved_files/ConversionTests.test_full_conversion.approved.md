@@ -35,9 +35,9 @@ Here's the kind of thing that you can do:
 
 Once you're comfortable with the background information in this page, further information is available in the following related pages.
 
-- [How to style custom statuses](how-to/style-custom-statuses).
-- [How to set up your custom statuses](how-to/set-up-custom-statuses).
-- [Status Collections](reference/status-collections/index).
+- [[how-to/style-custom-statuses|How to style custom statuses]].
+- [[how-to/set-up-custom-statuses|How to set up your custom statuses]].
+- [[reference/status-collections/index|Status Collections]].
 
 ---
 
@@ -84,7 +84,7 @@ Here is some more detail.
   - Also available:
     - `sort by status.type`
     - `group by status.type`
-  - For more information, see [Status Types](getting-started/statuses/status-types)
+  - For more information, see [[getting-started/statuses/status-types|Status Types]]
 
 ### Unknown Statuses
 
@@ -118,7 +118,7 @@ Now we have seen what is in a Status, what can we do with them?
 
 We can use them to control what Tasks does when a task's checkbox is clicked, or toggled.
 
-The [Example Statuses](getting-started/statuses/example-statuses) page has a variety of examples, for inspiration.
+The [[getting-started/statuses/example-statuses|Example Statuses]] page has a variety of examples, for inspiration.
 
 ---
 
@@ -137,7 +137,7 @@ They don't require any custom CSS styling or theming on order to display correct
 
 Before Tasks 1.23.0, these were the only statuses that Tasks knew about.
 
-See [Core Statuses](getting-started/statuses/core-statuses) to find out more.
+See [[getting-started/statuses/core-statuses|Core Statuses]] to find out more.
 
 ### Custom Statuses
 
@@ -168,16 +168,16 @@ What Tasks's custom statuses allow you to do is to **also customise the behaviou
 > Broad steps to understand and set up Statuses (or "Alternate Checkboxes"):
 >
 > - Understand what Statuses are:
->   - [Statuses](getting-started/statuses)
->   - [Custom Statuses](getting-started/statuses/custom-statuses)
+>   - [[getting-started/statuses|Statuses]]
+>   - [[getting-started/statuses/custom-statuses|Custom Statuses]]
 > - Choose your status styling scheme: this will determine the names and symbols for your custom statuses:
->   - Some common ones are shown in [Status Collections](reference/status-collections/index)
+>   - Some common ones are shown in [[reference/status-collections/index|Status Collections]]
 > - Set up your status styling scheme
->   - [How to style custom statuses](how-to/style-custom-statuses).
+>   - [[how-to/style-custom-statuses|How to style custom statuses]].
 > - Configure Tasks to use your custom statuses
->   - [How to set up your custom statuses](how-to/set-up-custom-statuses)
+>   - [[how-to/set-up-custom-statuses|How to set up your custom statuses]]
 > - Optionally, update your tasks searches to take advantage of the new flexibility
->   - [Filters for Task Statuses](queries/filters#filters-for-task-statuses)
+>   - [Filters for Task Statuses]({{ site.baseurl }}{% link queries/filters.md %}#filters-for-task-statuses)
 
 <!-- force a blank line --> <!-- endInclude -->
 
@@ -187,7 +187,7 @@ What Tasks's custom statuses allow you to do is to **also customise the behaviou
 
 ### Editing your tasks
 
-The [‘Create or edit Task’ Modal](getting-started/create-or-edit-task#status-and-done-on) allows you to change the status of a task.
+The [‘Create or edit Task’ Modal]({{ site.baseurl }}{% link getting-started/create-or-edit-task.md %}#status-and-done-on) allows you to change the status of a task.
 
 ### Related commands
 
@@ -208,7 +208,7 @@ We are tracking this in [issue #1486](https://github.com/obsidian-tasks-group/ob
   - `sort by status.type`
   - `group by status.type`
 
-For details, see [Filters for Task Statuses](queries/filters#filters-for-task-statuses)
+For details, see [Filters for Task Statuses]({{ site.baseurl }}{% link queries/filters.md %}#filters-for-task-statuses)
 
 > [!info]
 We envisage adding `status.symbol`.

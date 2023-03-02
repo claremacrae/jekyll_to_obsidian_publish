@@ -1,3 +1,4 @@
+import re
 from os import walk
 from os.path import join
 
@@ -22,11 +23,12 @@ def convert_content(content: str) -> str:
         ['{: .released }', '> [!success] Released'],
         ['{: .warning }', '> [!warning]'],
         ['{: .no_toc }\n', ''],
-        ['{{ site.baseurl }}{% link ', ''],
-        ['.md %}', ''],
     ]
     for replacement in replacements:
         content = content.replace(replacement[0], replacement[1])
+
+    p = re.compile('\[(.*)]\({{ site.baseurl }}{% link ([^ ]+)\.md %}\)')
+    content = p.sub('[[\\2|\\1]]', content)
 
     return content
 
