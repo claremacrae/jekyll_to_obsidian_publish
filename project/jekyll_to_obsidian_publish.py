@@ -22,7 +22,7 @@ class PageConverter:
 
     def convert_content(self, source_path: str, content: str) -> str:
         original_metadata = self.extract_front_matter(content)
-        content, _ = self.update_and_return_front_matter(content, source_path)
+        content = self.update_front_matter(content, source_path)
         content = self.convert_tables_of_contents(content)
         content = self.convert_callouts(content)
         content = self.convert_internal_links(content)
@@ -33,16 +33,8 @@ class PageConverter:
         metadata = frontmatter.loads(content)
         return metadata.to_dict()
 
-    def update_and_return_front_matter(self, content: str, source_path: str) -> Tuple[str, MetaData]:
-        """
-        Updates the front matter, and then returns the original from before updating,
-        as it will be useful for later steps in the conversion.
-
-        :param content: The current content of the file
-        :param source_path: The location of the original file
-        """
+    def update_front_matter(self, content: str, source_path: str) -> str:
         metadata = frontmatter.loads(content)
-        original_metadata = metadata.to_dict()
 
         unwanted_keys = [
             'grand_parent',
@@ -64,7 +56,7 @@ class PageConverter:
             # Make sure Publish picks up all other files.
             metadata['publish'] = True
 
-        return frontmatter.dumps(metadata), original_metadata
+        return frontmatter.dumps(metadata)
 
     def convert_tables_of_contents(self, content: str) -> str:
         table_of_contents = """
