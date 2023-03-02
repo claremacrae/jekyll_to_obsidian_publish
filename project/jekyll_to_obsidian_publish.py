@@ -27,6 +27,13 @@ publish: false
 
 """ + content
 
+        content = self.convert_tables_of_contents(content)
+        content = self.convert_callouts(content)
+        content = self.convert_internal_links(content)
+
+        return content
+
+    def convert_tables_of_contents(self, content: str) -> str:
         table_of_contents = """
 <details open markdown="block">
   <summary>
@@ -37,7 +44,6 @@ publish: false
 {:toc}
 </details>
 """
-
         table_of_contents_plus_rule = f'''
 {table_of_contents}
 ---'''
@@ -47,10 +53,6 @@ publish: false
             [table_of_contents, ''],
         ]
         content = self.apply_replacements(content, replacements)
-
-        content = self.convert_callouts(content)
-        content = self.convert_internal_links(content)
-
         return content
 
     def convert_callouts(self, content: str) -> str:
