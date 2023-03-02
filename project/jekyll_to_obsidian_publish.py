@@ -50,8 +50,7 @@ publish: false
             [table_of_contents_plus_rule, ''],
             [table_of_contents, ''],
         ]
-        for replacement in replacements:
-            content = content.replace(replacement[0], replacement[1])
+        content = self.apply_replacements(content, replacements)
 
         # TODO Convert hyphens in #.... (heading names) to spaces
         p = re.compile(r'\[([^{}]+)]\({{ site\.baseurl }}{% link ([a-z0-9-/]+)\.md %}(#[a-z-]+)?\)')
@@ -61,6 +60,11 @@ publish: false
             lines[i] = p.sub(r'[[\2\3|\1]]', line)
 
         return '\n'.join(lines)
+
+    def apply_replacements(self, content: str, replacements: StringReplacements) -> str:
+        for replacement in replacements:
+            content = content.replace(replacement[0], replacement[1])
+        return content
 
     def should_skip_file(self, source_path: str) -> bool:
         return source_path == './migration.md'
