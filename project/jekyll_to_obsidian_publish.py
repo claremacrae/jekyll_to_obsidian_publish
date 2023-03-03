@@ -98,11 +98,12 @@ class PageConverter:
         return self.apply_replacements(content, replacements)
 
     def convert_one_old_callout(self, content: str, old_title: str, old_color: str, new_callout_type: str) -> str:
+        replacement = f'> [!{new_callout_type}]\n> '
         replacements: StringReplacements = [
-            ['Warning\n{: .label .label-yellow}\n\n', '> [!warning]\n> '],
-            ['Warning\n{: .label .label-yellow }\n\n', '> [!warning]\n> '],
-            ['Warning\n{: .label .label-yellow}\n', '> [!warning]\n> '],
-            ['Warning\n{: .label .label-yellow }\n', '> [!warning]\n> '],
+            ['Warning\n{: .label .label-yellow}\n\n', replacement],
+            ['Warning\n{: .label .label-yellow }\n\n', replacement],
+            ['Warning\n{: .label .label-yellow}\n', replacement],
+            ['Warning\n{: .label .label-yellow }\n', replacement],
         ]
         return self.apply_replacements(content, replacements)
 
