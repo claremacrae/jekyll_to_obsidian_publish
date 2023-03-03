@@ -82,20 +82,27 @@ class PageConverter:
         return content
 
     def convert_callouts(self, content: str) -> str:
+        content = self.convert_one_old_callout(content, 'Warning', 'yellow', 'warning')
+
         replacements: StringReplacements = [
             ['{: .info }', '> [!info]'],
             ['{: .released }', '> [!quote] Released'],
             ['{: .warning }', '> [!warning]'],
-            ['Warning\n{: .label .label-yellow}\n\n', '> [!warning]\n> '],
-            ['Warning\n{: .label .label-yellow }\n\n', '> [!warning]\n> '],
-            ['Warning\n{: .label .label-yellow}\n', '> [!warning]\n> '],
-            ['Warning\n{: .label .label-yellow }\n', '> [!warning]\n> '],
             # ['Important\n{: .label .label-yellow }\n','> [!important]\n> '],
             # ['Important\n{: .label .label-yellow }\n', '> [!important]\n> '],
             # ['Info\n{: .label .label-blue }\n','> [!info]\n> '],
             # ['Info\n{: .label .label-blue }\n', '> [!info]\n> '],
             ['<div class="code-example" markdown="1">\n', ''],
             ['</div>\n', ''],
+        ]
+        return self.apply_replacements(content, replacements)
+
+    def convert_one_old_callout(self, content: str, old_title: str, old_color: str, new_callout_type: str) -> str:
+        replacements: StringReplacements = [
+            ['Warning\n{: .label .label-yellow}\n\n', '> [!warning]\n> '],
+            ['Warning\n{: .label .label-yellow }\n\n', '> [!warning]\n> '],
+            ['Warning\n{: .label .label-yellow}\n', '> [!warning]\n> '],
+            ['Warning\n{: .label .label-yellow }\n', '> [!warning]\n> '],
         ]
         return self.apply_replacements(content, replacements)
 
