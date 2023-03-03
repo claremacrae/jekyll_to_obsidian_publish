@@ -24,7 +24,7 @@ class ConversionTests(unittest.TestCase):
         self.verify_conversion_of_test_file_content('sample_jekyll_document.md')
 
     def test_sample_front_page(self) -> None:
-        self.verify_conversion_of_test_file_content('./index.md')
+        self.verify_conversion_of_test_file_content('./sample_front_page.md')
 
     # ------------------------------------------------------------------------------------------------
     # Helper functions
