@@ -21,22 +21,22 @@ class ConversionTests(unittest.TestCase):
         self.verify_conversion_of_content(content, './README.md')
 
     def test_full_conversion(self) -> None:
-        self.verify_conversion_of_test_file_content('sample_jekyll_document.md')
+        self.verify_conversion_of_test_file_content('sample_jekyll_document.md', './some-subdir/some-file.md')
 
     def test_sample_front_page(self) -> None:
-        self.verify_conversion_of_test_file_content('./sample_front_page.md')
+        self.verify_conversion_of_test_file_content('./sample_front_page.md', './index.md')
 
     # ------------------------------------------------------------------------------------------------
     # Helper functions
     # ------------------------------------------------------------------------------------------------
 
-    def verify_conversion_of_content(self, content: str, filename: str) -> None:
+    def verify_conversion_of_content(self, content: str, published_filename: str) -> None:
         converter = PageConverter()
         options = Options().for_file.with_extension(".md")
-        verify(converter.convert_content(filename, content), options=options)
+        verify(converter.convert_content(published_filename, content), options=options)
 
-    def verify_conversion_of_test_file_content(self, filename: str) -> None:
-        input_file = Path(__file__).with_name(filename)
+    def verify_conversion_of_test_file_content(self, markdown_file_to_read: str, published_filename) -> None:
+        input_file = Path(__file__).with_name(markdown_file_to_read)
         with open(input_file) as f:
             content = f.read()
-        self.verify_conversion_of_content(content, filename)
+        self.verify_conversion_of_content(content, published_filename)
