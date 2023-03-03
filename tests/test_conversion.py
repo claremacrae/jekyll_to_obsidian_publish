@@ -25,13 +25,19 @@ class ConversionTests(unittest.TestCase):
 
     def test_full_conversion(self) -> None:
         filename = 'sample_jekyll_document.md'
-        input_file = Path(__file__).with_name(filename)
-        with open(input_file) as f:
-            content = f.read()
+        self.verify_conversion_of_test_file_content(filename)
 
-        self.verify_conversion_of_content(content, filename)
+    # ------------------------------------------------------------------------------------------------
+    # Helper functions
+    # ------------------------------------------------------------------------------------------------
 
     def verify_conversion_of_content(self, content: str, filename: str) -> None:
         converter = PageConverter()
         options = Options().for_file.with_extension(".md")
         verify(converter.convert_content(filename, content), options=options)
+
+    def verify_conversion_of_test_file_content(self, filename: str) -> None:
+        input_file = Path(__file__).with_name(filename)
+        with open(input_file) as f:
+            content = f.read()
+        self.verify_conversion_of_content(content, filename)
