@@ -359,10 +359,10 @@ Tasks reads task lines **backwards from the end of the line**, looking for metad
 This means that you can only put **block links** (`^link-name`) and **tags** after metadata such as dates, priorities, recurrence rules. Anything else will break the parsing of dates, priorities and recurrence rules.
 
 ```markdown
--   [ ] Task with priority placed before tag _priority will be recognized_ � #tag
--   [ ] Task with date placed before tag _date will be recognized_ � 2021-04-09 #tag
--   [ ] Task with date placed before other text _date will be not recognized_ � 2021-04-09 other text
--   [ ] Task with block link _works_ � 2021-04-09 ^e5bebf
+-   [ ] Task with priority placed before tag _priority will be recognized_ 🔼 #tag
+-   [ ] Task with date placed before tag _date will be recognized_ 📅 2021-04-09 #tag
+-   [ ] Task with date placed before other text _date will be not recognized_ 📅 2021-04-09 other text
+-   [ ] Task with block link _works_ 📅 2021-04-09 ^e5bebf
 ```
 
 If you are concerned that some values in a task are not being parsed as you intended, perhaps because a task is not being found by Tasks searches, you can view the task in the [[getting-started/create-or-edit-task|‘Create or edit Task’ Modal]].
