@@ -363,3 +363,8 @@ If there are any **Tasks emojis visible in the Description field**, close the mo
 > [!warning]
 > Tasks only supports checklist items in markdown files with the file extension `.md`.
 
+
+---
+
+> [!important]
+> A recurring task should have a due date. The due date and the recurrence rule must appear after the task's description.

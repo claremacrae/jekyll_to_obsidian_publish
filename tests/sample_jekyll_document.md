@@ -405,3 +405,11 @@ Warning
 Tasks only supports checklist items in markdown files with the file extension `.md`.
 
 </div>
+
+---
+
+Important
+{: .label .label-yellow }
+
+A recurring task should have a due date. The due date and the recurrence rule must appear after the task's description.
+
