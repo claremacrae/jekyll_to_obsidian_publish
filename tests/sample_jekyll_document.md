@@ -413,3 +413,10 @@ Important
 
 A recurring task should have a due date. The due date and the recurrence rule must appear after the task's description.
 
+---
+
+Info
+{: .label .label-blue }
+Headings are displayed in case-sensitive alphabetical order, not the original order.
+
+

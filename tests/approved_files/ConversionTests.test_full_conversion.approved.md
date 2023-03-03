@@ -368,3 +368,8 @@ If there are any **Tasks emojis visible in the Description field**, close the mo
 
 > [!important]
 > A recurring task should have a due date. The due date and the recurrence rule must appear after the task's description.
+
+---
+
+> [!info]
+> Headings are displayed in case-sensitive alphabetical order, not the original order.

@@ -84,13 +84,12 @@ class PageConverter:
     def convert_callouts(self, content: str) -> str:
         content = self.convert_one_old_callout(content, 'Warning', 'yellow', 'warning')
         content = self.convert_one_old_callout(content, 'Important', 'yellow', 'important')
+        content = self.convert_one_old_callout(content, 'Info', 'blue', 'info')
 
         replacements: StringReplacements = [
             ['{: .info }', '> [!info]'],
             ['{: .released }', '> [!quote] Released'],
             ['{: .warning }', '> [!warning]'],
-            # ['Info\n{: .label .label-blue }\n','> [!info]\n> '],
-            # ['Info\n{: .label .label-blue }\n', '> [!info]\n> '],
             ['<div class="code-example" markdown="1">\n', ''],
             ['</div>\n', ''],
         ]
