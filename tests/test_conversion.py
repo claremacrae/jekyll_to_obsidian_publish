@@ -15,17 +15,13 @@ class ConversionTests(unittest.TestCase):
         # Download DiffMerge at https://sourcegear.com/diffmerge/
 
     def test_info_conversion(self) -> None:
-        converter = PageConverter()
-
         input = f'''{{: .info }}
 > This is the information
 '''
-        options = Options().for_file.with_extension(".md")
-        verify(converter.convert_content('./README.md', input), options=options)
+        self.verify_conversion_of_content(input, './README.md')
 
     def test_full_conversion(self) -> None:
-        filename = 'sample_jekyll_document.md'
-        self.verify_conversion_of_test_file_content(filename)
+        self.verify_conversion_of_test_file_content('sample_jekyll_document.md')
 
     # ------------------------------------------------------------------------------------------------
     # Helper functions
