@@ -84,7 +84,7 @@ class PageConverter:
     def convert_callouts(self, content: str) -> str:
         replacements: StringReplacements = [
             ['{: .info }', '> [!info]'],
-            ['{: .released }', '> [!success] Released'],
+            ['{: .released }', '> [!quote] Released'],
             ['{: .warning }', '> [!warning]'],
             ['<div class="code-example" markdown="1">\n', ''],
             ['</div>\n', ''],
