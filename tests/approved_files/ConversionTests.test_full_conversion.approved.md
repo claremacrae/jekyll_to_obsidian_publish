@@ -226,7 +226,6 @@ See [[getting-started/recurring-tasks|recurring tasks (repetition)]].
 ### Callouts in Divs
 
 
-<div class="code-example" markdown="1">
 Warning
 {: .label .label-yellow}
 Whenever Tasks behaves in an unexpected way, **please try restarting Obsidian**.
@@ -378,4 +377,3 @@ Warning
 {: .label .label-yellow}
 Tasks only supports checklist items in markdown files with the file extension `.md`.
 
-</div>

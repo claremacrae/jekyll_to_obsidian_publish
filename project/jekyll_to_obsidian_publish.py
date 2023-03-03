@@ -86,6 +86,8 @@ class PageConverter:
             ['{: .info }', '> [!info]'],
             ['{: .released }', '> [!success] Released'],
             ['{: .warning }', '> [!warning]'],
+            ['<div class="code-example" markdown="1">\n', ''],
+            ['</div>\n', ''],
         ]
         return self.apply_replacements(content, replacements)
 
