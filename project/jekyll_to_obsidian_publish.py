@@ -102,10 +102,10 @@ class PageConverter:
         brace1 = '{'
         brace2 = '}'
         replacements: StringReplacements = [
-            [f'Warning\n{brace1}: .label .label-yellow{brace2}\n\n', replacement],
-            [f'Warning\n{brace1}: .label .label-yellow {brace2}\n\n', replacement],
-            [f'Warning\n{brace1}: .label .label-yellow{brace2}\n', replacement],
-            [f'Warning\n{brace1}: .label .label-yellow {brace2}\n', replacement],
+            [f'{old_title}\n{brace1}: .label .label-{old_color}{brace2}\n\n', replacement],
+            [f'{old_title}\n{brace1}: .label .label-{old_color} {brace2}\n\n', replacement],
+            [f'{old_title}\n{brace1}: .label .label-{old_color}{brace2}\n', replacement],
+            [f'{old_title}\n{brace1}: .label .label-{old_color} {brace2}\n', replacement],
         ]
         return self.apply_replacements(content, replacements)
 
