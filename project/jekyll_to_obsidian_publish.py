@@ -26,6 +26,7 @@ class PageConverter:
         content = self.convert_tables_of_contents(content)
         content = self.convert_callouts(content)
         content = self.convert_internal_links(content)
+        content = self.add_danger_message_if_default_page(content, source_path)
 
         return content
 
@@ -124,6 +125,28 @@ class PageConverter:
 
     def should_skip_file(self, source_path: str) -> bool:
         return source_path == './migration.md'
+
+    def add_danger_message_if_default_page(self, content: str, source_path: str) -> str:
+        if source_path != './index.md':
+            return content
+
+        heading_to_modify = '# Introduction\n'
+        danger =  '''
+> [!Danger]
+> This is an experimental conversion of the Tasks user docs to Obsidian Publish, tracked in [#1706](https://github.com/obsidian-tasks-group/obsidian-tasks/issues/1706).
+>
+> For now, please visit the [original documentation site](https://obsidian-tasks-group.github.io/obsidian-tasks/) instead.
+>
+> For testing purposes, this site is published at [publish.obsidian.md/tasks](https://publish.obsidian.md/tasks/queries/sorting).
+>
+> You can read more about progress on this conversion, including known problems and remaining steps, at the [Migration to Publish](https://publish.obsidian.md/tasks/migration) page.
+'''
+        replacements: StringReplacements = [
+            [heading_to_modify, heading_to_modify + danger]
+        ]
+        return self.apply_replacements(content, replacements)
+
+
 
     def read_file(self, source_path: str) -> str:
         with open(source_path) as f:
