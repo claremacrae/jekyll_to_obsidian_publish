@@ -138,6 +138,8 @@ class PageConverter:
 >
 > For now, please visit the [original documentation site](https://obsidian-tasks-group.github.io/obsidian-tasks/) instead.
 >
+> Every page here has a 'View this page on the old documentation site' section at the bottom, making it easy to compare the old and new sites side-by-side, and report and problems.
+> 
 > For testing purposes, this site is published at [publish.obsidian.md/tasks](https://publish.obsidian.md/tasks/queries/sorting).
 >
 > You can read more about progress on this conversion, including known problems and remaining steps, at the [Migration to Publish](https://publish.obsidian.md/tasks/migration) page.
