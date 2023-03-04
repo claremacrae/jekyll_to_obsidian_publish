@@ -133,16 +133,16 @@ class PageConverter:
 
         heading_to_modify = '# Introduction\n'
         danger =  '''
-> [!Danger]
+> [!Danger] About this site
 > This is an experimental conversion of the Tasks user docs to Obsidian Publish, tracked in [#1706](https://github.com/obsidian-tasks-group/obsidian-tasks/issues/1706).
 >
-> For now, please visit the [original documentation site](https://obsidian-tasks-group.github.io/obsidian-tasks/) instead.
+> This site - [publish.obsidian.md/tasks](https://publish.obsidian.md/tasks/queries/sorting) - is now well-tested, and you are welcome to stay here and use the site. The content is the same as on the original site.
 >
-> Every page here has a 'View this page on the old documentation site' section at the bottom, making it easy to compare the old and new sites side-by-side, and report and problems.
-> 
-> For testing purposes, this site is published at [publish.obsidian.md/tasks](https://publish.obsidian.md/tasks/queries/sorting).
+> Every page here has a 'View this page on the old documentation site' section at the bottom, making it easy to compare the old and new sites side-by-side, and to report any problems you find.
 >
-> You can read more about progress on this conversion, including known problems and remaining steps, at the [Migration to Publish](https://publish.obsidian.md/tasks/migration) page.
+> You can read more about progress on this conversion, including known problems and remaining steps, at the [[migration|Migration to Publish]] page.
+>
+> Alternatively, you can visit the [original documentation site](https://obsidian-tasks-group.github.io/obsidian-tasks/) instead.
 '''
         replacements: StringReplacements = [
             [heading_to_modify, heading_to_modify + danger]
