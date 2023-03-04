@@ -28,4 +28,6 @@ Supports due dates, recurring tasks (repetition), done dates, sub-set of checkli
 >
 > You can view [this page on the old documentation site](https://obsidian-tasks-group.github.io/obsidian-tasks/).
 >
-> If you notice any problems in this page, compared to the old one, please let us know in [#1706](https://github.com/obsidian-tasks-group/obsidian-tasks/issues/1706#issuecomment-1454284835). Thank you.
+> We are keeping a list of [[migration#Current Status and Known Problems|Known Problems]].
+>
+> If you notice any other problems in this page, compared to the old one, please let us know in [#1706](https://github.com/obsidian-tasks-group/obsidian-tasks/issues/1706#issuecomment-1454284835). Thank you.
