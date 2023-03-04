@@ -166,6 +166,7 @@ class PageConverter:
         relative_path = relative_path.replace('./', '')
         relative_path = relative_path.replace('index.md', '')
         relative_path = relative_path.replace('.md', '/')
+        old_url = f'https://obsidian-tasks-group.github.io/obsidian-tasks/{relative_path}'
         return content + f'''
 ---
 
@@ -174,7 +175,7 @@ class PageConverter:
 > [!Info] Request for feedback
 > This page is an experimental migration of the Tasks user docs to Obsidian Publish. When the conversion is good enough, this will become the live site.
 >
-> For comparison, you can view [this page on the old documentation site](https://obsidian-tasks-group.github.io/obsidian-tasks/{relative_path}).
+> For comparison, you can view [this page on the old documentation site]({old_url}).
 
 > [!Bug] Please report any problems
 >
