@@ -390,7 +390,8 @@ If there are any **Tasks emojis visible in the Description field**, close the mo
 > If you notice any other problems in this page, compared to [the old one](https://obsidian-tasks-group.github.io/obsidian-tasks/getting-started/statuses/), please let us know in [#1706](https://github.com/obsidian-tasks-group/obsidian-tasks/issues/1706#issuecomment-1454284835).
 >
 > Please include:
+>
 > - The URL of this problem page
 > - A screenshot of the problem.
-> 
+>
 > Thank you!

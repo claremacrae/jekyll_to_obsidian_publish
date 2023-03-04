@@ -184,9 +184,10 @@ class PageConverter:
 > If you notice any other problems in this page, compared to [the old one]({old_url}), please let us know in [#1706](https://github.com/obsidian-tasks-group/obsidian-tasks/issues/1706#issuecomment-1454284835).
 >
 > Please include:
+>
 > - The URL of this problem page
 > - A screenshot of the problem.
-> 
+>
 > Thank you!
 '''
 
