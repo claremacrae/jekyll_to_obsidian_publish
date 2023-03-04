@@ -169,7 +169,14 @@ class PageConverter:
         return content + f'''
 ---
 
-_Jump to [this page on the old documentation site](https://obsidian-tasks-group.github.io/obsidian-tasks/{relative_path})._
+## View this page on the old documentation site
+
+> [!Warning]
+> This page is an experimental conversion of the Tasks user docs to Obsidian Publish.
+>
+> You can view [this page on the old documentation site](https://obsidian-tasks-group.github.io/obsidian-tasks/{relative_path}).
+>
+> If you notice any problems in this page, compared to the old one, please let us know in [#1706](https://github.com/obsidian-tasks-group/obsidian-tasks/issues/1706#issuecomment-1454284835). Thank you.
 '''
 
 
