@@ -27,6 +27,7 @@ class PageConverter:
         content = self.convert_callouts(content)
         content = self.convert_internal_links(content)
         content = self.add_danger_message_if_default_page(content, source_path)
+        content = self.add_link_to_this_page_on_old_site(content, source_path)
 
         return content
 
@@ -146,8 +147,6 @@ class PageConverter:
         ]
         return self.apply_replacements(content, replacements)
 
-
-
     def read_file(self, source_path: str) -> str:
         with open(source_path) as f:
             content = f.read()
@@ -158,6 +157,20 @@ class PageConverter:
         Path(os.path.dirname(destination_path)).mkdir(parents=True, exist_ok=True)
         with open(destination_path, 'w') as f:
             f.write(content)
+
+    def add_link_to_this_page_on_old_site(self, content: str, source_path: str) -> str:
+        if source_path == './README.md':
+            return content
+
+        relative_path = source_path
+        relative_path = relative_path.replace('./', '')
+        relative_path = relative_path.replace('index.md', '')
+        relative_path = relative_path.replace('.md', '/')
+        return content + f'''
+---
+
+_Jump to [this page on the old documentation site](https://obsidian-tasks-group.github.io/obsidian-tasks/{relative_path})._
+'''
 
 
 class SiteConverter:

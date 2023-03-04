@@ -373,3 +373,7 @@ If there are any **Tasks emojis visible in the Description field**, close the mo
 
 > [!info]
 > Headings are displayed in case-sensitive alphabetical order, not the original order.
+
+---
+
+_Jump to [this page on the old documentation site](https://obsidian-tasks-group.github.io/obsidian-tasks/getting-started/statuses/)._

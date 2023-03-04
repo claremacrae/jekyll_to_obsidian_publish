@@ -21,7 +21,7 @@ class ConversionTests(unittest.TestCase):
         self.verify_conversion_of_content(content, './README.md')
 
     def test_full_conversion(self) -> None:
-        self.verify_conversion_of_test_file_content('sample_jekyll_document.md', './some-subdir/some-file.md')
+        self.verify_conversion_of_test_file_content('sample_jekyll_document.md', './getting-started/statuses.md')
 
     def test_sample_front_page(self) -> None:
         self.verify_conversion_of_test_file_content('./sample_front_page.md', './index.md')

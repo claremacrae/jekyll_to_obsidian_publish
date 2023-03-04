@@ -18,3 +18,7 @@ publish: true
 Track tasks across your entire vault.
 Query them and mark them as done wherever you want.
 Supports due dates, recurring tasks (repetition), done dates, sub-set of checklist items, and filtering.
+
+---
+
+_Jump to [this page on the old documentation site](https://obsidian-tasks-group.github.io/obsidian-tasks/)._
