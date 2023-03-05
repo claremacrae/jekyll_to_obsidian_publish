@@ -26,7 +26,7 @@ class PageConverter:
         content = self.convert_tables_of_contents(content)
         content = self.convert_callouts(content)
         content = self.convert_internal_links(content)
-        content = self.other_fixes(content)
+        content = self.convert_tables_with_blank_lines(content)
         content = self.add_danger_message_if_default_page(content, source_path)
         content = self.add_link_to_this_page_on_old_site(content, source_path)
 
@@ -120,19 +120,14 @@ class PageConverter:
 
         return '\n'.join(lines)
 
-    def other_fixes(self, content: str) -> str:
-        tr_before = '''  </tr>
-
-  <tr>
-'''
-        tr_after = '''  </tr>
-  <tr>
-'''
+    def convert_tables_with_blank_lines(self, content: str) -> str:
+        # Fix the table in Urgency.md by removing blank lines:
+        tr_afore = '''  </tr>\n\n  <tr>'''
+        tr_after = '''  </tr>\n  <tr>'''
         replacements: StringReplacements = [
-            [tr_before, tr_after],
+            [tr_afore, tr_after],
         ]
         return self.apply_replacements(content, replacements)
-
 
     def apply_replacements(self, content: str, replacements: StringReplacements) -> str:
         for replacement in replacements:
