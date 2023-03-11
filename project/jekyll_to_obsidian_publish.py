@@ -21,7 +21,6 @@ class PageConverter:
         self.write_file(destination_path, content)
 
     def convert_content(self, source_path: str, content: str) -> str:
-        original_metadata = self.extract_front_matter(content)
         content = self.update_front_matter(content, source_path)
         content = self.convert_tables_of_contents(content)
         content = self.convert_callouts(content)
@@ -237,6 +236,17 @@ class SiteConverter:
                     destination_path = join(self.destination, source_path)
                     destination_path = os.path.normpath(destination_path)
                     print(destination_path)
+
+                    # Experiment with renaming file to match title in metadata
+                    # content = page_converter.read_file(source_path)
+                    # original_metadata = page_converter.extract_front_matter(content)
+                    # if 'title' in original_metadata.keys():
+                    #     new_file_name = original_metadata['title']
+                    #     destination_path = os.path.join(os.path.split(destination_path)[0], new_file_name + '.md')
+                    # 
+                    # print(destination_path)
+                    # print()
+
                     page_converter.convert_file(source_path, destination_path)
 
 
