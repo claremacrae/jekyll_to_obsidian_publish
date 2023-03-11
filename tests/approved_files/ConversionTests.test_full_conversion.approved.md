@@ -453,6 +453,16 @@ The scores are as follows:
 </tbody>
 </table>
 
+# Quick Reference
+
+[1]: https://obsidian-tasks-group.github.io/obsidian-tasks/queries/filters/
+[2]: https://obsidian-tasks-group.github.io/obsidian-tasks/queries/sorting/
+[3]: https://obsidian-tasks-group.github.io/obsidian-tasks/queries/grouping/
+[4]: https://obsidian-tasks-group.github.io/obsidian-tasks/queries/layout/
+[5]: https://obsidian-tasks-group.github.io/obsidian-tasks/queries/combining-filters/
+
+This table summarizes the filters and other options available inside a `tasks` block.
+
 ---
 
 ## View this page on the old documentation site
