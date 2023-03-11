@@ -11,23 +11,25 @@ MetaData = Dict[str, Any]
 
 
 class PageConverter:
-    def convert_file(self, source_path: str, destination_path: str) -> None:
+    def convert_file(self, source_path: str, destination_path: str, decorate: bool) -> None:
         if self.should_skip_file(source_path):
             print(f'    Skipping {source_path}')
             return
 
         content = self.read_file(source_path)
-        content = self.convert_content(source_path, content)
+        content = self.convert_content(source_path, content, decorate)
         self.write_file(destination_path, content)
 
-    def convert_content(self, source_path: str, content: str) -> str:
-        content = self.update_front_matter(content, source_path)
+    def convert_content(self, source_path: str, content: str, decorate: bool) -> str:
+        if decorate:
+            content = self.update_front_matter(content, source_path)
         content = self.convert_tables_of_contents(content)
         content = self.convert_callouts(content)
         content = self.convert_internal_links(content)
         content = self.convert_tables_with_blank_lines(content)
-        content = self.add_danger_message_if_default_page(content, source_path)
-        content = self.add_link_to_this_page_on_old_site(content, source_path)
+        if decorate:
+            content = self.add_danger_message_if_default_page(content, source_path)
+            content = self.add_link_to_this_page_on_old_site(content, source_path)
 
         return content
 
@@ -215,7 +217,7 @@ class SiteConverter:
         self.source = source
         self.destination = destination
 
-    def convert(self) -> None:
+    def convert(self, decorate: bool = True) -> None:
         """
         Walks through the filetree rooted at `root`.
         For each markdown file that it finds, it replaces a particular comment line with the corresponding template.
@@ -231,6 +233,7 @@ class SiteConverter:
             files.sort()
 
             for file in files:
+                print(file)
                 if file.endswith(".md"):
                     source_path = join(root, file)
                     destination_path = join(self.destination, source_path)
@@ -247,12 +250,16 @@ class SiteConverter:
                     # print(destination_path)
                     # print()
 
-                    page_converter.convert_file(source_path, destination_path)
+                    page_converter.convert_file(source_path, destination_path, decorate)
 
 
 def convert_markdown() -> None:
     site_converter = SiteConverter('.', '../docsv2')
     site_converter.convert()
+
+    # Activate this to update the snippet file(s):
+    # site_converter = SiteConverter('../docs-snippets', '../docs-snippets2')
+    # site_converter.convert(False)
 
 
 if __name__ == '__main__':

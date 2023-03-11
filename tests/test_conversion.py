@@ -33,7 +33,7 @@ class ConversionTests(unittest.TestCase):
     def verify_conversion_of_content(self, content: str, published_filename: str) -> None:
         converter = PageConverter()
         options = Options().for_file.with_extension(".md")
-        verify(converter.convert_content(published_filename, content), options=options)
+        verify(converter.convert_content(published_filename, content, True), options=options)
 
     def verify_conversion_of_test_file_content(self, markdown_file_to_read: str, published_filename) -> None:
         input_file = Path(__file__).with_name(markdown_file_to_read)
