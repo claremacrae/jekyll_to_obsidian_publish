@@ -466,7 +466,7 @@ This table summarizes the filters and other options available inside a `tasks` b
 # Broken internal links
 
 Prior to Tasks 2.0.0, the second date in absolute date ranges was ignored.
-See the tables in the [Appendix below]({{ site.baseurl }}{% link queries/filters.md %}#appendix-tasks-200-improvements-to-date-filters) to understand the changes in results, and whether you need to update any of your searches.
+See the tables in the [[queries/filters#appendix-tasks-200-improvements-to-date-filters|Appendix below]] to understand the changes in results, and whether you need to update any of your searches.
 
 ---
 

@@ -113,7 +113,7 @@ class PageConverter:
 
     def convert_internal_links(self, content: str) -> str:
         # TODO Convert hyphens in #.... (heading names) to spaces
-        p = re.compile(r'\[([^{}]+)]\({{ site\.baseurl }}{% link ([a-z0-9-/]+)\.md %}(#[a-z-]+)?\)')
+        p = re.compile(r'\[([^{}]+)]\({{ site\.baseurl }}{% link ([a-z0-9-/]+)\.md %}(#[a-z-0-9]+)?\)')
 
         lines = content.split('\n')
         for i, line in enumerate(lines):
