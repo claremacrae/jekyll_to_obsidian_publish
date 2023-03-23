@@ -96,6 +96,7 @@ class PageConverter:
             ['{: .warning }', '> [!warning]'],
             ['<div class="code-example" markdown="1">\n', ''],
             ['</div>\n', ''],
+            ['<hr />\n', ''],
         ]
         return self.apply_replacements(content, replacements)
 

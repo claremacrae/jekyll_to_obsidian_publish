@@ -470,7 +470,6 @@ See the tables in the [[queries/filters#appendix-tasks-200-improvements-to-date-
 
 ---
 
-<hr />
 > [!important]
 > There are edge cases for tasks that recur monthly or yearly.
 For example, a task may be due `2022-01-31` and recur `every 3 months`.
