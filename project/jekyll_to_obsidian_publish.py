@@ -192,14 +192,13 @@ class PageConverter:
                                 self.new_link_line(anchor_or_empty, link_text, path_without_file_extension))
         return line
 
-    def old_link_line(self, anchor_or_empty: str, link_text: str,
-                      path_to_file_from_root_without_file_extension: str) -> str:
+    def old_link_line(self, anchor_or_empty: str, link_text: str, path_without_file_extension: str) -> str:
         whole_link_including_brackets = ''.join(
             [
                 '[',
                 link_text,
                 ']({{ site.baseurl }}{% link ' + \
-                path_to_file_from_root_without_file_extension,
+                path_without_file_extension,
                 '.md %}',
                 anchor_or_empty,
                 ')',
@@ -207,9 +206,8 @@ class PageConverter:
         )
         return whole_link_including_brackets
 
-    def new_link_line(self, anchor_or_empty: str, link_text: str,
-                      path_to_file_from_root_without_file_extension: str) -> str:
-        new_link_including_brackets = f'[[{path_to_file_from_root_without_file_extension}{anchor_or_empty}|{link_text}]]'
+    def new_link_line(self, anchor_or_empty: str, link_text: str, path_without_file_extension: str) -> str:
+        new_link_including_brackets = f'[[{path_without_file_extension}{anchor_or_empty}|{link_text}]]'
         return new_link_including_brackets
 
     def convert_tables_with_blank_lines(self, content: str) -> str:
