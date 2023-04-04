@@ -74,7 +74,9 @@ class PageRenamer:
     }
 
     def get_new_file_name(self, path_without_file_extension: str) -> str:
-        return path_without_file_extension
+        old_path = f'../docsv2/{path_without_file_extension}.md'
+        new_path = PageRenamer.renames[old_path]
+        return os.path.basename(new_path).replace('.md', '')
 
 
 class PageConverter:

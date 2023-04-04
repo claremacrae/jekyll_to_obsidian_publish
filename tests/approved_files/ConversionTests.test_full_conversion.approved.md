@@ -21,9 +21,9 @@ Here's the kind of thing that you can do:
 
 Once you're comfortable with the background information in this page, further information is available in the following related pages.
 
-- [[how-to/style-custom-statuses|How to style custom statuses]].
-- [[how-to/set-up-custom-statuses|How to set up your custom statuses]].
-- [[reference/status-collections/index|Status Collections]].
+- [[Style custom statuses|How to style custom statuses]].
+- [[Set up custom statuses|How to set up your custom statuses]].
+- [[Status Collections|Status Collections]].
 
 ---
 
@@ -70,7 +70,7 @@ Here is some more detail.
   - Also available:
     - `sort by status.type`
     - `group by status.type`
-  - For more information, see [[getting-started/statuses/status-types|Status Types]]
+  - For more information, see [[Status Types|Status Types]]
 
 ### Unknown Statuses
 
@@ -104,7 +104,7 @@ Now we have seen what is in a Status, what can we do with them?
 
 We can use them to control what Tasks does when a task's checkbox is clicked, or toggled.
 
-The [[getting-started/statuses/example-statuses|Example Statuses]] page has a variety of examples, for inspiration.
+The [[Example Statuses|Example Statuses]] page has a variety of examples, for inspiration.
 
 ---
 
@@ -123,7 +123,7 @@ They don't require any custom CSS styling or theming on order to display correct
 
 Before Tasks 1.23.0, these were the only statuses that Tasks knew about.
 
-See [[getting-started/statuses/core-statuses|Core Statuses]] to find out more.
+See [[Core Statuses|Core Statuses]] to find out more.
 
 ### Custom Statuses
 
@@ -154,16 +154,16 @@ What Tasks's custom statuses allow you to do is to **also customise the behaviou
 > Broad steps to understand and set up Statuses (or "Alternate Checkboxes"):
 >
 > - Understand what Statuses are:
->   - [[getting-started/statuses|Statuses]]
->   - [[getting-started/statuses/custom-statuses|Custom Statuses]]
+>   - [[Statuses|Statuses]]
+>   - [[Custom Statuses|Custom Statuses]]
 > - Choose your status styling scheme: this will determine the names and symbols for your custom statuses:
->   - Some common ones are shown in [[reference/status-collections/index|Status Collections]]
+>   - Some common ones are shown in [[Status Collections|Status Collections]]
 > - Set up your status styling scheme
->   - [[how-to/style-custom-statuses|How to style custom statuses]].
+>   - [[Style custom statuses|How to style custom statuses]].
 > - Configure Tasks to use your custom statuses
->   - [[how-to/set-up-custom-statuses|How to set up your custom statuses]]
+>   - [[Set up custom statuses|How to set up your custom statuses]]
 > - Optionally, update your tasks searches to take advantage of the new flexibility
->   - [[queries/filters#filters-for-task-statuses|Filters for Task Statuses]]
+>   - [[Filters#filters-for-task-statuses|Filters for Task Statuses]]
 
 <!-- force a blank line --> <!-- endInclude -->
 
@@ -173,7 +173,7 @@ What Tasks's custom statuses allow you to do is to **also customise the behaviou
 
 ### Editing your tasks
 
-The [[getting-started/create-or-edit-task#status-and-done-on|‘Create or edit Task’ Modal]] allows you to change the status of a task.
+The [[Create or edit Task#status-and-done-on|‘Create or edit Task’ Modal]] allows you to change the status of a task.
 
 ### Related commands
 
@@ -194,7 +194,7 @@ We are tracking this in [issue #1486](https://github.com/obsidian-tasks-group/ob
   - `sort by status.type`
   - `group by status.type`
 
-For details, see [[queries/filters#filters-for-task-statuses|Filters for Task Statuses]]
+For details, see [[Filters#filters-for-task-statuses|Filters for Task Statuses]]
 
 > [!info]
 We envisage adding `status.symbol`.
@@ -217,11 +217,11 @@ Subsequently, the custom statuses implementation in Tasks has diverged from the 
 > This is a test warning
 
 2 links on one line:
-Urgency can only consider the parameters it knows: [[getting-started/dates|dates]] and [[getting-started/priority|priorities]].
+Urgency can only consider the parameters it knows: [[Dates|dates]] and [[Priority|priorities]].
 
-Or you can read about [[getting-started/statuses/status-settings|Status Settings]], and see how to [[getting-started/statuses/editing-a-status|edit a Status]].
+Or you can read about [[Status Settings|Status Settings]], and see how to [[Editing a Status|edit a Status]].
 
-See [[getting-started/recurring-tasks|recurring tasks (repetition)]].
+See [[Recurring Tasks|recurring tasks (repetition)]].
 
 ### Callouts in Divs
 
@@ -466,7 +466,7 @@ This table summarizes the filters and other options available inside a `tasks` b
 # Broken internal links
 
 Prior to Tasks 2.0.0, the second date in absolute date ranges was ignored.
-See the tables in the [[queries/filters#appendix-tasks-200-improvements-to-date-filters|Appendix below]] to understand the changes in results, and whether you need to update any of your searches.
+See the tables in the [[Filters#appendix-tasks-200-improvements-to-date-filters|Appendix below]] to understand the changes in results, and whether you need to update any of your searches.
 
 ---
 

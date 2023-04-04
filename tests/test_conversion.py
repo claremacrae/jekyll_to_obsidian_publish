@@ -4,7 +4,7 @@ from pathlib import Path
 from approvaltests import Options
 from approvaltests.approvals import verify
 
-from project.jekyll_to_obsidian_publish import PageConverter
+from project.jekyll_to_obsidian_publish import PageConverter, PageRenamer
 
 
 class ConversionTests(unittest.TestCase):
@@ -13,6 +13,12 @@ class ConversionTests(unittest.TestCase):
         # set_default_reporter(None)  # Use the first difftool found on your system
         # self.reporter = GenericDiffReporterFactory().get("DiffMerge")
         # Download DiffMerge at https://sourcegear.com/diffmerge/
+
+    def test_page_renamer(self) -> None:
+        renamer = PageRenamer()
+        assert renamer.get_new_file_name('index') == 'Introduction'
+        assert renamer.get_new_file_name('reference/index') == 'Reference'
+        assert renamer.get_new_file_name('getting-started/statuses/status-types') == 'Status Types'
 
     def test_info_conversion(self) -> None:
         content = f'''{{: .info }}
