@@ -366,12 +366,8 @@ class SiteConverter:
 
             print(new_path)
             if new_path != destination_path:
-                git_command = f'git mv "{destination_path}" "{new_path}"'
                 file_renames[destination_path] = new_path
-                print(git_command)
-                subprocess.run(git_command, shell=True)
-                print()
-                destination_path = new_path
+                destination_path = self.git_rename_file(destination_path, new_path)
         return destination_path
 
     def rename_file_based_on_saved_filenames(self, destination_path: str) -> str:
@@ -383,11 +379,15 @@ class SiteConverter:
 
         print(new_path)
         if new_path != destination_path:
-            git_command = f'git mv "{destination_path}" "{new_path}"'
-            print(git_command)
-            subprocess.run(git_command, shell=True)
-            print()
-            destination_path = new_path
+            destination_path = self.git_rename_file(destination_path, new_path)
+        return destination_path
+
+    def git_rename_file(self, destination_path: str, new_path: str) -> str:
+        git_command = f'git mv "{destination_path}" "{new_path}"'
+        print(git_command)
+        subprocess.run(git_command, shell=True)
+        print()
+        destination_path = new_path
         return destination_path
 
 
