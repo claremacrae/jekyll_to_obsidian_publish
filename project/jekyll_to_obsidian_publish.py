@@ -226,6 +226,7 @@ class SiteConverter:
         """
 
         page_converter = PageConverter()
+        file_renames: Dict[str, str] = dict()
 
         for root, dirs, files in walk(self.source, topdown=True):
             # Exclude directories and files
@@ -252,13 +253,14 @@ class SiteConverter:
                         print(new_path)
                         if new_path != destination_path:
                             git_command = f'git mv "{destination_path}" "{new_path}"'
+                            file_renames[destination_path] = new_path
                             print(git_command)
                             subprocess.run(git_command, shell=True)
                             print()
                             destination_path = new_path
 
                     page_converter.convert_file(source_path, destination_path, decorate)
-
+        print(file_renames)
 
 def convert_markdown() -> None:
     site_converter = SiteConverter('.', '../docsv2')
