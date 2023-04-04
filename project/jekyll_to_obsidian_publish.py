@@ -342,27 +342,33 @@ class SiteConverter:
                     destination_path = os.path.normpath(destination_path)
                     print(destination_path)
 
-                    # Experiment with renaming file to match title in metadata
-                    content = page_converter.read_file(source_path)
-                    original_metadata = page_converter.extract_front_matter(content)
-                    if 'title' in original_metadata.keys():
-                        new_file_name = original_metadata['title'] + '.md'
-                        new_path = os.path.join(os.path.split(destination_path)[0], new_file_name)
-
-                        print(new_path)
-                        if new_path != destination_path:
-                            git_command = f'git mv "{destination_path}" "{new_path}"'
-                            file_renames[destination_path] = new_path
-                            print(git_command)
-                            subprocess.run(git_command, shell=True)
-                            print()
-                            destination_path = new_path
+                    destination_path = self.rename_file_based_on_title(destination_path, file_renames, page_converter,
+                                                                       source_path)
 
                     page_converter.convert_file(source_path, destination_path, decorate)
         # The printout of file_renames gets pasted in to PageRenamer
         if file_renames != PageRenamer.renames:
             print(file_renames)
             raise RuntimeError('ERROR - list of filenames in PageRenamer is out of date')
+
+    def rename_file_based_on_title(self, destination_path: str, file_renames: Dict[str, str],
+                                   page_converter: PageConverter, source_path: str) -> str:
+        # Experiment with renaming file to match title in metadata
+        content = page_converter.read_file(source_path)
+        original_metadata = page_converter.extract_front_matter(content)
+        if 'title' in original_metadata.keys():
+            new_file_name = original_metadata['title'] + '.md'
+            new_path = os.path.join(os.path.split(destination_path)[0], new_file_name)
+
+            print(new_path)
+            if new_path != destination_path:
+                git_command = f'git mv "{destination_path}" "{new_path}"'
+                file_renames[destination_path] = new_path
+                print(git_command)
+                subprocess.run(git_command, shell=True)
+                print()
+                destination_path = new_path
+        return destination_path
 
 
 def convert_markdown() -> None:
