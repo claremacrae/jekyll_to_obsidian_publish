@@ -1,5 +1,6 @@
 import os.path
 import re
+import subprocess
 from os import walk
 from os.path import join
 from typing import List, Tuple, Any, Dict
@@ -242,14 +243,19 @@ class SiteConverter:
                     print(destination_path)
 
                     # Experiment with renaming file to match title in metadata
-                    # content = page_converter.read_file(source_path)
-                    # original_metadata = page_converter.extract_front_matter(content)
-                    # if 'title' in original_metadata.keys():
-                    #     new_file_name = original_metadata['title']
-                    #     destination_path = os.path.join(os.path.split(destination_path)[0], new_file_name + '.md')
-                    # 
-                    # print(destination_path)
-                    # print()
+                    content = page_converter.read_file(source_path)
+                    original_metadata = page_converter.extract_front_matter(content)
+                    if 'title' in original_metadata.keys():
+                        new_file_name = original_metadata['title'] + '.md'
+                        new_path = os.path.join(os.path.split(destination_path)[0], new_file_name)
+
+                        print(new_path)
+                        if new_path != destination_path:
+                            git_command = f'git mv "{destination_path}" "{new_path}"'
+                            print(git_command)
+                            subprocess.run(git_command, shell=True)
+                            print()
+                            destination_path = new_path
 
                     page_converter.convert_file(source_path, destination_path, decorate)
 
