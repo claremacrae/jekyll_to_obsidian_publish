@@ -326,6 +326,7 @@ class SiteConverter:
 
         page_converter = PageConverter()
         file_renames: Dict[str, str] = dict()
+        use_saved_filenames = True
 
         for root, dirs, files in walk(self.source, topdown=True):
             # Exclude directories and files
@@ -342,14 +343,17 @@ class SiteConverter:
                     destination_path = os.path.normpath(destination_path)
                     print(destination_path)
 
-                    destination_path = self.rename_file_based_on_title(destination_path, file_renames, page_converter,
-                                                                       source_path)
+                    if use_saved_filenames:
+                        destination_path = self.rename_file_based_on_saved_filenames(destination_path)
+                    else:
+                        destination_path = self.rename_file_based_on_title(destination_path, file_renames, page_converter,
+                                                                           source_path)
 
                     page_converter.convert_file(source_path, destination_path, decorate)
-        # The printout of file_renames gets pasted in to PageRenamer
-        if file_renames != PageRenamer.renames:
-            print(file_renames)
-            raise RuntimeError('ERROR - list of filenames in PageRenamer is out of date')
+        # # The printout of file_renames gets pasted in to PageRenamer
+        # if file_renames != PageRenamer.renames:
+        #     print(file_renames)
+        #     raise RuntimeError('ERROR - list of filenames in PageRenamer is out of date')
 
     def rename_file_based_on_title(self, destination_path: str, file_renames: Dict[str, str],
                                    page_converter: PageConverter, source_path: str) -> str:
@@ -368,6 +372,22 @@ class SiteConverter:
                 subprocess.run(git_command, shell=True)
                 print()
                 destination_path = new_path
+        return destination_path
+
+    def rename_file_based_on_saved_filenames(self, destination_path: str) -> str:
+        if destination_path in PageRenamer.renames:
+            new_path = PageRenamer.renames[destination_path]
+        else:
+            # For cases like README.md with no TITLE in the file, so not saved in PageRenamer
+            new_path = destination_path
+
+        print(new_path)
+        if new_path != destination_path:
+            git_command = f'git mv "{destination_path}" "{new_path}"'
+            print(git_command)
+            subprocess.run(git_command, shell=True)
+            print()
+            destination_path = new_path
         return destination_path
 
 
