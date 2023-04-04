@@ -185,8 +185,12 @@ class PageConverter:
         return '\n'.join(lines)
 
     def convert_all_internal_links_in_line(self, line: str) -> str:
-        updated_line = EXTRACT_JEKYLL_INTERNAL_LINK_REGEXP.sub(r'[[\2\3|\1]]', line)
-        return updated_line
+        matches = EXTRACT_JEKYLL_INTERNAL_LINK_REGEXP.findall(line)
+        for link_text, path_to_file_from_root_without_file_extension, anchor_or_none in matches:
+            whole_link_including_brackets = '[' + link_text + ']({{ site.baseurl }}{% link ' + path_to_file_from_root_without_file_extension + '.md %}' + anchor_or_none + ')'
+            new_link_including_brackets = f'[[{path_to_file_from_root_without_file_extension}{anchor_or_none}|{link_text}]]'
+            line = line.replace(whole_link_including_brackets, new_link_including_brackets)
+        return line
 
     def convert_tables_with_blank_lines(self, content: str) -> str:
         # Fix the table in Urgency.md by removing blank lines:
