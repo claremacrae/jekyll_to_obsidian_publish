@@ -188,9 +188,8 @@ class PageConverter:
     def convert_all_internal_links_in_line(self, line: str) -> str:
         matches = EXTRACT_JEKYLL_INTERNAL_LINK_REGEXP.findall(line)
         for link_text, path_without_file_extension, anchor_or_empty in matches:
-            whole_link_including_brackets = self.old_link_line(anchor_or_empty, link_text, path_without_file_extension)
-            new_link_including_brackets = self.new_link_line(anchor_or_empty, link_text, path_without_file_extension)
-            line = line.replace(whole_link_including_brackets, new_link_including_brackets)
+            line = line.replace(self.old_link_line(anchor_or_empty, link_text, path_without_file_extension),
+                                self.new_link_line(anchor_or_empty, link_text, path_without_file_extension))
         return line
 
     def old_link_line(self, anchor_or_empty: str, link_text: str,
