@@ -64,7 +64,7 @@ class PageRenamer:
         '../docsv2/quick-reference/index.md': '../docsv2/quick-reference/Quick Reference.md',
         '../docsv2/reference/index.md': '../docsv2/reference/Reference.md',
         '../docsv2/reference/status-collections/anuppuccin-theme.md': '../docsv2/reference/status-collections/AnuPpuccin Theme.md',
-        '../docsv2/reference/status-collections/aura-theme.md': '../docsv2/reference/status-collections/Aura Theme (Dark mode only).md',
+        '../docsv2/reference/status-collections/aura-theme.md': '../docsv2/reference/status-collections/Aura Theme.md',
         '../docsv2/reference/status-collections/ebullientworks-theme.md': '../docsv2/reference/status-collections/Ebullientworks Theme.md',
         '../docsv2/reference/status-collections/index.md': '../docsv2/reference/status-collections/Status Collections.md',
         '../docsv2/reference/status-collections/its-theme.md': '../docsv2/reference/status-collections/ITS Theme.md',
