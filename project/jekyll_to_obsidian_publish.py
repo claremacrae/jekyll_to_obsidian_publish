@@ -7,6 +7,8 @@ from typing import List, Tuple, Any, Dict
 
 import frontmatter
 
+EXTRACT_JEKYLL_INTERNAL_LINK_REGEXP = re.compile(r'\[([^{}]+)]\({{ site\.baseurl }}{% link ([a-z0-9-/]+)\.md %}(#[a-z-0-9]+)?\)')
+
 StringReplacements = List[List[str]]
 MetaData = Dict[str, Any]
 
@@ -175,11 +177,9 @@ class PageConverter:
 
     def convert_internal_links(self, content: str) -> str:
         # TODO Convert hyphens in #.... (heading names) to spaces
-        p = re.compile(r'\[([^{}]+)]\({{ site\.baseurl }}{% link ([a-z0-9-/]+)\.md %}(#[a-z-0-9]+)?\)')
-
         lines = content.split('\n')
         for i, line in enumerate(lines):
-            lines[i] = p.sub(r'[[\2\3|\1]]', line)
+            lines[i] = EXTRACT_JEKYLL_INTERNAL_LINK_REGEXP.sub(r'[[\2\3|\1]]', line)
 
         return '\n'.join(lines)
 
