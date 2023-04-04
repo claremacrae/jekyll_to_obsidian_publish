@@ -7,7 +7,8 @@ from typing import List, Tuple, Any, Dict
 
 import frontmatter
 
-EXTRACT_JEKYLL_INTERNAL_LINK_REGEXP = re.compile(r'\[([^{}]+)]\({{ site\.baseurl }}{% link ([a-z0-9-/]+)\.md %}(#[a-z-0-9]+)?\)')
+EXTRACT_JEKYLL_INTERNAL_LINK_REGEXP = re.compile(
+    r'\[([^{}]+)]\({{ site\.baseurl }}{% link ([a-z0-9-/]+)\.md %}(#[a-z-0-9]+)?\)')
 
 StringReplacements = List[List[str]]
 MetaData = Dict[str, Any]
@@ -195,7 +196,8 @@ class PageConverter:
             line = line.replace(whole_link_including_brackets, new_link_including_brackets)
         return line
 
-    def old_link_line(self, anchor_or_empty: str, link_text: str, path_to_file_from_root_without_file_extension: str) -> str:
+    def old_link_line(self, anchor_or_empty: str, link_text: str,
+                      path_to_file_from_root_without_file_extension: str) -> str:
         whole_link_including_brackets = ''.join(
             [
                 '[',
@@ -209,7 +211,8 @@ class PageConverter:
         )
         return whole_link_including_brackets
 
-    def new_link_line(self, anchor_or_empty: str, link_text: str, path_to_file_from_root_without_file_extension: str) -> str:
+    def new_link_line(self, anchor_or_empty: str, link_text: str,
+                      path_to_file_from_root_without_file_extension: str) -> str:
         new_link_including_brackets = f'[[{path_to_file_from_root_without_file_extension}{anchor_or_empty}|{link_text}]]'
         return new_link_including_brackets
 
@@ -235,7 +238,7 @@ class PageConverter:
             return content
 
         heading_to_modify = '# Introduction\n'
-        danger =  '''
+        danger = '''
 > [!Danger] About this site
 > This is an experimental conversion of the Tasks user docs to Obsidian Publish, tracked in [#1706](https://github.com/obsidian-tasks-group/obsidian-tasks/issues/1706).
 >
@@ -354,6 +357,7 @@ class SiteConverter:
         if file_renames != PageRenamer.renames:
             print(file_renames)
             raise RuntimeError('ERROR - list of filenames in PageRenamer is out of date')
+
 
 def convert_markdown() -> None:
     site_converter = SiteConverter('.', '../docsv2')
