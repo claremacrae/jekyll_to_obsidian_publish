@@ -179,9 +179,14 @@ class PageConverter:
         # TODO Convert hyphens in #.... (heading names) to spaces
         lines = content.split('\n')
         for i, line in enumerate(lines):
-            lines[i] = EXTRACT_JEKYLL_INTERNAL_LINK_REGEXP.sub(r'[[\2\3|\1]]', line)
+            updated_line = self.convert_all_internal_links_in_line(line)
+            lines[i] = updated_line
 
         return '\n'.join(lines)
+
+    def convert_all_internal_links_in_line(self, line: str) -> str:
+        updated_line = EXTRACT_JEKYLL_INTERNAL_LINK_REGEXP.sub(r'[[\2\3|\1]]', line)
+        return updated_line
 
     def convert_tables_with_blank_lines(self, content: str) -> str:
         # Fix the table in Urgency.md by removing blank lines:
