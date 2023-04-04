@@ -73,6 +73,9 @@ class PageRenamer:
         '../docsv2/reference/status-collections/things-theme.md': '../docsv2/reference/status-collections/Things Theme.md'
     }
 
+    def get_new_file_name(self, path_without_file_extension: str) -> str:
+        return path_without_file_extension
+
 
 class PageConverter:
     def convert_file(self, source_path: str, destination_path: str, decorate: bool) -> None:
@@ -207,7 +210,9 @@ class PageConverter:
         return whole_link_including_brackets
 
     def new_link_line(self, anchor_or_empty: str, link_text: str, path_without_file_extension: str) -> str:
-        new_link_including_brackets = f'[[{path_without_file_extension}{anchor_or_empty}|{link_text}]]'
+        renamer = PageRenamer()
+        new_path_without_file_extension = renamer.get_new_file_name(path_without_file_extension)
+        new_link_including_brackets = f'[[{new_path_without_file_extension}{anchor_or_empty}|{link_text}]]'
         return new_link_including_brackets
 
     def convert_tables_with_blank_lines(self, content: str) -> str:
