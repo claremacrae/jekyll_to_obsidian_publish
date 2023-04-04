@@ -214,7 +214,12 @@ class PageConverter:
     def new_link_line(self, anchor_or_empty: str, link_text: str, path_without_file_extension: str) -> str:
         renamer = PageRenamer()
         new_path_without_file_extension = renamer.get_new_file_name(path_without_file_extension)
-        new_link_including_brackets = f'[[{new_path_without_file_extension}{anchor_or_empty}|{link_text}]]'
+        path_and_anchor = f'{new_path_without_file_extension}{anchor_or_empty}'
+        if path_and_anchor == link_text:
+            # No need to give custom display text, if it matches the file name, and we are not linking to a heading
+            new_link_including_brackets = f'[[{link_text}]]'
+        else:
+            new_link_including_brackets = f'[[{path_and_anchor}|{link_text}]]'
         return new_link_including_brackets
 
     def convert_tables_with_blank_lines(self, content: str) -> str:

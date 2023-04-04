@@ -23,7 +23,7 @@ Once you're comfortable with the background information in this page, further in
 
 - [[Style custom statuses|How to style custom statuses]].
 - [[Set up custom statuses|How to set up your custom statuses]].
-- [[Status Collections|Status Collections]].
+- [[Status Collections]].
 
 ---
 
@@ -70,7 +70,7 @@ Here is some more detail.
   - Also available:
     - `sort by status.type`
     - `group by status.type`
-  - For more information, see [[Status Types|Status Types]]
+  - For more information, see [[Status Types]]
 
 ### Unknown Statuses
 
@@ -104,7 +104,7 @@ Now we have seen what is in a Status, what can we do with them?
 
 We can use them to control what Tasks does when a task's checkbox is clicked, or toggled.
 
-The [[Example Statuses|Example Statuses]] page has a variety of examples, for inspiration.
+The [[Example Statuses]] page has a variety of examples, for inspiration.
 
 ---
 
@@ -123,7 +123,7 @@ They don't require any custom CSS styling or theming on order to display correct
 
 Before Tasks 1.23.0, these were the only statuses that Tasks knew about.
 
-See [[Core Statuses|Core Statuses]] to find out more.
+See [[Core Statuses]] to find out more.
 
 ### Custom Statuses
 
@@ -154,10 +154,10 @@ What Tasks's custom statuses allow you to do is to **also customise the behaviou
 > Broad steps to understand and set up Statuses (or "Alternate Checkboxes"):
 >
 > - Understand what Statuses are:
->   - [[Statuses|Statuses]]
->   - [[Custom Statuses|Custom Statuses]]
+>   - [[Statuses]]
+>   - [[Custom Statuses]]
 > - Choose your status styling scheme: this will determine the names and symbols for your custom statuses:
->   - Some common ones are shown in [[Status Collections|Status Collections]]
+>   - Some common ones are shown in [[Status Collections]]
 > - Set up your status styling scheme
 >   - [[Style custom statuses|How to style custom statuses]].
 > - Configure Tasks to use your custom statuses
@@ -219,7 +219,7 @@ Subsequently, the custom statuses implementation in Tasks has diverged from the 
 2 links on one line:
 Urgency can only consider the parameters it knows: [[Dates|dates]] and [[Priority|priorities]].
 
-Or you can read about [[Status Settings|Status Settings]], and see how to [[Editing a Status|edit a Status]].
+Or you can read about [[Status Settings]], and see how to [[Editing a Status|edit a Status]].
 
 See [[Recurring Tasks|recurring tasks (repetition)]].
 
