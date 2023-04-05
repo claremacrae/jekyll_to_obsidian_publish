@@ -408,9 +408,9 @@ def main(argv: Sequence[str]) -> None:
     site_converter = SiteConverter('.', '../docsv2')
     if args.save_files_list:
         site_converter.create_json_files_list()
-    elif args.rename_files:
+    if args.rename_files:
         site_converter.rename_files()
-    elif args.convert_content:
+    if args.convert_content:
         site_converter.convert()
         # Activate this to update the snippet file(s):
         # site_converter = SiteConverter('../docs-snippets', '../docs-snippets2')
