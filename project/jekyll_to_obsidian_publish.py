@@ -343,7 +343,7 @@ class SiteConverter:
             for file in files:
                 print(file)
                 if file.endswith(".md"):
-                    source_path = join(root, file)
+                    source_path = self.get_source_path(root, file)
                     destination_path = join(self.destination, source_path)
                     destination_path = os.path.normpath(destination_path)
                     print(destination_path)
@@ -410,7 +410,7 @@ class SiteConverter:
             for file in files:
                 print(file)
                 if file.endswith(".md"):
-                    source_path = join(root, file)
+                    source_path = self.get_source_path(root, file)
                     destination_path = join(self.destination, source_path)
                     destination_path = os.path.normpath(destination_path)
                     print(destination_path)
@@ -428,6 +428,10 @@ class SiteConverter:
         # Save file_renames
         with open(FILE_NAMES_MARKDOWN_FILE, 'w') as f:
             f.write(json.dumps(file_renames, indent=4))
+
+    def get_source_path(self, root: str, file: str) -> str:
+        source_path = join(root, file)
+        return source_path
 
     def filter_tree_args(self, dirs: List[str], files: List[str]) -> None:
         # Exclude directories and files
