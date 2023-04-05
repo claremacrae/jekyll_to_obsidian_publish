@@ -325,6 +325,7 @@ class SiteConverter:
         """
         Walks through the filetree rooted at `root`.
         Saves a JSON file of the old and new file names
+        This will be useful later to add redirects to the old files on the gh-pages branch
         """
 
         page_converter = PageConverter()
