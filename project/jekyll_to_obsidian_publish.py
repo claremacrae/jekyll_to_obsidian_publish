@@ -1,3 +1,4 @@
+import json
 import os.path
 import re
 import subprocess
@@ -393,7 +394,43 @@ class SiteConverter:
         return destination_path
 
     def create_json_files_list(self) -> None:
-        pass
+        """
+        Walks through the filetree rooted at `root`.
+        Saves a JSON file of the old and new file names
+        """
+
+        page_converter = PageConverter()
+        file_renames: Dict[str, str] = dict()
+
+        for root, dirs, files in walk(self.source, topdown=True):
+            # Exclude directories and files
+            dirs[:] = [d for d in dirs if d not in ['_site']]
+            dirs.sort()
+            # files[:] = [f for f in files if f not in FILES_TO_EXCLUDE]
+            files.sort()
+
+            for file in files:
+                print(file)
+                if file.endswith(".md"):
+                    source_path = join(root, file)
+                    destination_path = join(self.destination, source_path)
+                    destination_path = os.path.normpath(destination_path)
+                    print(destination_path)
+
+                    # Experiment with renaming file to match title in metadata
+                    content = page_converter.read_file(source_path)
+                    original_metadata = page_converter.extract_front_matter(content)
+                    new_path = destination_path
+                    if 'title' in original_metadata.keys():
+                        new_file_name = original_metadata['title'] + '.md'
+                        new_path = os.path.join(os.path.split(destination_path)[0], new_file_name)
+
+                    print(new_path)
+                    file_renames[destination_path] = new_path
+        # Save file_renames
+        this_dir = os.path.dirname(__file__)
+        with open(os.path.join(this_dir, 'markdown_files.json'), 'w') as f:
+            f.write(json.dumps(file_renames, indent=4))
 
 
 def convert_markdown() -> None:
