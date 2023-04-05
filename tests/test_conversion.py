@@ -8,11 +8,20 @@ from project.jekyll_to_obsidian_publish import PageConverter, PageRenamer
 
 
 class PageRenamerTests(unittest.TestCase):
-    def test_page_renamer(self) -> None:
+    def test_link_renamer(self) -> None:
         renamer = PageRenamer()
         assert renamer.get_new_link_file_name('index') == 'Introduction'
         assert renamer.get_new_link_file_name('reference/index') == 'Reference'
         assert renamer.get_new_link_file_name('getting-started/statuses/status-types') == 'Status Types'
+
+    def test_page_renamer(self) -> None:
+        def test_get_new_disk_file_name(destination: str, expected: str) -> None:
+            assert (PageRenamer.get_new_disk_file_name(destination)) == expected
+
+        test_get_new_disk_file_name('../docsv2/README.md', '../docsv2/README.md')
+        test_get_new_disk_file_name('../docsv2/other-plugins/dataview.md', '../docsv2/other-plugins/Dataview.md')
+        test_get_new_disk_file_name('../docsv2/reference/status-collections/aura-theme.md',
+                                    '../docsv2/reference/status-collections/Aura Theme.md')
 
 
 class PageConverterTests(unittest.TestCase):
