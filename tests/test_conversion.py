@@ -50,6 +50,7 @@ class PageRenamerTests(unittest.TestCase):
         assert PageRenamer.get_new_directory_name('advanced') == 'Advanced'
         assert PageRenamer.get_new_directory_name('getting-started') == 'Getting Started'
         assert PageRenamer.get_new_directory_name('getting-started/statuses') == 'Getting Started/Statuses'
+        assert PageRenamer.get_new_directory_name('reference') == 'Reference'
         assert PageRenamer.get_new_directory_name('reference/status-collections') == 'Reference/Status Collections'
 
 class PageConverterTests(unittest.TestCase):

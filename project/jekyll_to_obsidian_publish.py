@@ -416,8 +416,24 @@ class SiteConverter:
             new_directory = PageRenamer.get_new_directory_name(old_directory)
             if old_directory == new_directory:
                 continue
-            # Rename it
-            print(f'TODO: Rename {old_directory} to {new_directory}')
+            # Write command to rename it
+            tempdir = new_directory + "2"
+            print(f'git mv "{old_directory}" "{tempdir}" && git mv "{tempdir}" "{new_directory}"')
+            # The actual commands executed were:
+            #
+            #   git mv "advanced" "Advanced2" && git mv "Advanced2" "Advanced"
+            #   git mv "getting-started" "Getting Started2" && git mv "Getting Started2" "Getting Started"
+            #   git mv "Getting Started/statuses" "Getting Started/Statuses2" && git mv "Getting Started/Statuses2" "Getting Started/Statuses"
+            #   git mv "how-to" "How To2" && git mv "How To2" "How To"
+            #   git mv "installation" "Installation2" && git mv "Installation2" "Installation"
+            #   git mv "other-plugins" "Other Plugins2" && git mv "Other Plugins2" "Other Plugins"
+            #   git mv "queries" "Queries2" && git mv "Queries2" "Queries"
+            #   git mv "quick-reference" "Quick Reference2" && git mv "Quick Reference2" "Quick Reference"
+            #   git mv "reference" "Reference2" && git mv "Reference2" "Reference"
+            #   git mv "Reference/status-collections" "Reference/Status Collections2" && git mv "Reference/Status Collections2" "Reference/Status Collections"
+            #
+            # Note that the two ones renaming sub-directories were first manually edited to
+            # apply the capitalisation of the parent directory
 
 
 def main(argv: Sequence[str]) -> None:
