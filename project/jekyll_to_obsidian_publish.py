@@ -348,12 +348,12 @@ class SiteConverter:
                     else:
                         destination_path = self.rename_file_based_on_title(destination_path, file_renames,
                                                                            page_converter, source_path)
+                        # # The printout of file_renames gets pasted in to PageRenamer
+                        # if file_renames != PageRenamer.renames:
+                        #     print(file_renames)
+                        #     raise RuntimeError('ERROR - list of filenames in PageRenamer is out of date')
 
                     page_converter.convert_file(source_path, destination_path, decorate)
-        # # The printout of file_renames gets pasted in to PageRenamer
-        # if file_renames != PageRenamer.renames:
-        #     print(file_renames)
-        #     raise RuntimeError('ERROR - list of filenames in PageRenamer is out of date')
 
     def rename_file_based_on_title(self, destination_path: str, file_renames: Dict[str, str],
                                    page_converter: PageConverter, source_path: str) -> str:
