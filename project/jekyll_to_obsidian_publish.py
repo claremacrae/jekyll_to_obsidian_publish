@@ -346,6 +346,8 @@ class SiteConverter:
                     new_path = destination_path
                     if 'title' in original_metadata.keys():
                         new_file_name = original_metadata['title'] + '.md'
+                        # Fixup a file now, to avoid renaming it when we update docs for the theme supporting light mode
+                        new_file_name = new_file_name.replace(' (Dark mode only)', '')
                         new_path = os.path.join(os.path.split(destination_path)[0], new_file_name)
 
                     print(new_path)
