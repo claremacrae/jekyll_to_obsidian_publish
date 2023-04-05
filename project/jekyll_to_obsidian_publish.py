@@ -5,7 +5,7 @@ import subprocess
 import sys
 from os import walk
 from os.path import join
-from typing import List, Tuple, Any, Dict, Sequence
+from typing import List, Any, Dict, Sequence
 import argparse
 
 import frontmatter
@@ -438,6 +438,23 @@ class SiteConverter:
         # files[:] = [f for f in files if f not in FILES_TO_EXCLUDE]
         files.sort()
 
+    def rename_files(self) -> None:
+        """
+        Walks through the filetree rooted at `root`.
+        Renames the file according to the dictionary in code above
+        """
+
+        for root, dirs, files in walk(self.source, topdown=True):
+            self.filter_tree_args(dirs, files)
+
+            for file in files:
+                print(file)
+                if file.endswith(".md"):
+                    source_path = self.get_source_path(root, file)
+                    destination_path = self.get_destination_path(source_path)
+                    self.rename_file_based_on_saved_filenames(destination_path)
+
+
 
 def convert_markdown() -> None:
     site_converter = SiteConverter('.', '../docsv2')
@@ -456,12 +473,17 @@ def main(argv: Sequence[str]) -> None:
         "--save-files-list", action="store_true",
         help="Generate a JSON file containing all the original Markdown docs files."
     )
+    parser.add_argument(
+        "--rename-files", action="store_true",
+        help="Rename markdown files from Jekyll file names to their titles"
+    )
     args = parser.parse_args(argv)
 
     site_converter = SiteConverter('.', '../docsv2')
     if args.save_files_list:
-        print('hello')
         site_converter.create_json_files_list()
+    elif args.rename_files:
+        site_converter.rename_files()
     else:
         convert_markdown()
 
