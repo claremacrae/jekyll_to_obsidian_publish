@@ -405,11 +405,7 @@ class SiteConverter:
         file_renames: Dict[str, str] = dict()
 
         for root, dirs, files in walk(self.source, topdown=True):
-            # Exclude directories and files
-            dirs[:] = [d for d in dirs if d not in ['_site']]
-            dirs.sort()
-            # files[:] = [f for f in files if f not in FILES_TO_EXCLUDE]
-            files.sort()
+            self.filter_tree_args(dirs, files)
 
             for file in files:
                 print(file)
@@ -432,6 +428,13 @@ class SiteConverter:
         # Save file_renames
         with open(FILE_NAMES_MARKDOWN_FILE, 'w') as f:
             f.write(json.dumps(file_renames, indent=4))
+
+    def filter_tree_args(self, dirs: List[str], files: List[str]) -> None:
+        # Exclude directories and files
+        dirs[:] = [d for d in dirs if d not in ['_site']]
+        dirs.sort()
+        # files[:] = [f for f in files if f not in FILES_TO_EXCLUDE]
+        files.sort()
 
 
 def convert_markdown() -> None:
