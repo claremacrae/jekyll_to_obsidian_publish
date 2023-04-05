@@ -23,7 +23,7 @@ class PageRenamer:
     with open(FILE_NAMES_MARKDOWN_FILE) as f:
         renames = json.load(f)
 
-    def get_new_file_name(self, path_without_file_extension: str) -> str:
+    def get_new_link_file_name(self, path_without_file_extension: str) -> str:
         """
         This converts a filename in a link
         :param path_without_file_extension: 
@@ -181,7 +181,7 @@ class PageConverter:
 
     def new_link_line(self, anchor_or_empty: str, link_text: str, path_without_file_extension: str) -> str:
         renamer = PageRenamer()
-        new_path_without_file_extension = renamer.get_new_file_name(path_without_file_extension)
+        new_path_without_file_extension = renamer.get_new_link_file_name(path_without_file_extension)
         path_and_anchor = f'{new_path_without_file_extension}{anchor_or_empty}'
         if path_and_anchor == link_text:
             # No need to give custom display text, if it matches the file name, and we are not linking to a heading

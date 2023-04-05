@@ -16,9 +16,9 @@ class ConversionTests(unittest.TestCase):
 
     def test_page_renamer(self) -> None:
         renamer = PageRenamer()
-        assert renamer.get_new_file_name('index') == 'Introduction'
-        assert renamer.get_new_file_name('reference/index') == 'Reference'
-        assert renamer.get_new_file_name('getting-started/statuses/status-types') == 'Status Types'
+        assert renamer.get_new_link_file_name('index') == 'Introduction'
+        assert renamer.get_new_link_file_name('reference/index') == 'Reference'
+        assert renamer.get_new_link_file_name('getting-started/statuses/status-types') == 'Status Types'
 
     def test_info_conversion(self) -> None:
         content = f'''{{: .info }}
