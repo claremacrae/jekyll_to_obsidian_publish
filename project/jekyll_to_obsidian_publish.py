@@ -1,9 +1,11 @@
 import os.path
 import re
 import subprocess
+import sys
 from os import walk
 from os.path import join
-from typing import List, Tuple, Any, Dict
+from typing import List, Tuple, Any, Dict, Sequence
+import argparse
 
 import frontmatter
 
@@ -390,6 +392,9 @@ class SiteConverter:
         destination_path = new_path
         return destination_path
 
+    def create_json_files_list(self) -> None:
+        pass
+
 
 def convert_markdown() -> None:
     site_converter = SiteConverter('.', '../docsv2')
@@ -400,5 +405,23 @@ def convert_markdown() -> None:
     # site_converter.convert(False)
 
 
+def main(argv: Sequence[str]) -> None:
+    parser = argparse.ArgumentParser(
+        description="Convert Tasks plugin docs from Jekyll to Obsidian Publish"
+    )
+    parser.add_argument(
+        "--save-files-list", action="store_true",
+        help="Generate a JSON file containing all the original Markdown docs files."
+    )
+    args = parser.parse_args(argv)
+
+    site_converter = SiteConverter('.', '../docsv2')
+    if args.save_files_list:
+        print('hello')
+        site_converter.create_json_files_list()
+    else:
+        convert_markdown()
+
+
 if __name__ == '__main__':
-    convert_markdown()
+    main(sys.argv[1:])
