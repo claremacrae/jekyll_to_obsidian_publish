@@ -20,63 +20,8 @@ MetaData = Dict[str, Any]
 
 
 class PageRenamer:
-    renames = {
-        '../docsv2/index.md': '../docsv2/Introduction.md',
-        '../docsv2/advanced/api.md': '../docsv2/advanced/Tasks Api.md',
-        '../docsv2/advanced/daily-agenda.md': '../docsv2/advanced/Daily Agenda.md',
-        '../docsv2/advanced/index.md': '../docsv2/advanced/Advanced.md',
-        '../docsv2/advanced/notifications.md': '../docsv2/advanced/Notifications.md',
-        '../docsv2/advanced/quickadd.md': '../docsv2/advanced/Quickadd.md',
-        '../docsv2/advanced/styling.md': '../docsv2/advanced/Styling.md',
-        '../docsv2/advanced/urgency.md': '../docsv2/advanced/Urgency.md',
-        '../docsv2/getting-started/auto-suggest.md': '../docsv2/getting-started/Auto-Suggest.md',
-        '../docsv2/getting-started/create-or-edit-task.md': '../docsv2/getting-started/Create or edit Task.md',
-        '../docsv2/getting-started/dates.md': '../docsv2/getting-started/Dates.md',
-        '../docsv2/getting-started/global-filter.md': '../docsv2/getting-started/Global Filter.md',
-        '../docsv2/getting-started/index.md': '../docsv2/getting-started/Getting Started.md',
-        '../docsv2/getting-started/priority.md': '../docsv2/getting-started/Priority.md',
-        '../docsv2/getting-started/recurring-tasks.md': '../docsv2/getting-started/Recurring Tasks.md',
-        '../docsv2/getting-started/statuses.md': '../docsv2/getting-started/Statuses.md',
-        '../docsv2/getting-started/use-filename-as-default-date.md': '../docsv2/getting-started/Use Filename as Default Date.md',
-        '../docsv2/getting-started/statuses/core-statuses.md': '../docsv2/getting-started/statuses/Core Statuses.md',
-        '../docsv2/getting-started/statuses/custom-statuses.md': '../docsv2/getting-started/statuses/Custom Statuses.md',
-        '../docsv2/getting-started/statuses/editing-a-status.md': '../docsv2/getting-started/statuses/Editing a Status.md',
-        '../docsv2/getting-started/statuses/example-statuses.md': '../docsv2/getting-started/statuses/Example Statuses.md',
-        '../docsv2/getting-started/statuses/status-settings.md': '../docsv2/getting-started/statuses/Status Settings.md',
-        '../docsv2/getting-started/statuses/status-types.md': '../docsv2/getting-started/statuses/Status Types.md',
-        '../docsv2/how-to/find-tasks-for-coming-7-days.md': '../docsv2/how-to/Find tasks for coming 7 days.md',
-        '../docsv2/how-to/find-tasks-with-invalid-data.md': '../docsv2/how-to/Find tasks with invalid data.md',
-        '../docsv2/how-to/get-tasks-in-current-file.md': '../docsv2/how-to/How to get tasks in current file.md',
-        '../docsv2/how-to/index.md': '../docsv2/how-to/How Tos.md',
-        '../docsv2/how-to/set-up-custom-statuses.md': '../docsv2/how-to/Set up custom statuses.md',
-        '../docsv2/how-to/show-tasks-in-calendar.md': '../docsv2/how-to/Show tasks in a calendar.md',
-        '../docsv2/how-to/style-backlinks.md': '../docsv2/how-to/How to style backlinks.md',
-        '../docsv2/how-to/style-custom-statuses.md': '../docsv2/how-to/Style custom statuses.md',
-        '../docsv2/installation/index.md': '../docsv2/installation/Installation.md',
-        '../docsv2/other-plugins/dataview.md': '../docsv2/other-plugins/Dataview.md',
-        '../docsv2/other-plugins/index.md': '../docsv2/other-plugins/Other Plugins.md',
-        '../docsv2/queries/combining-filters.md': '../docsv2/queries/Combining Filters.md',
-        '../docsv2/queries/comments.md': '../docsv2/queries/Comments.md',
-        '../docsv2/queries/examples.md': '../docsv2/queries/Examples.md',
-        '../docsv2/queries/explaining-queries.md': '../docsv2/queries/Explaining Queries.md',
-        '../docsv2/queries/filters.md': '../docsv2/queries/Filters.md',
-        '../docsv2/queries/grouping.md': '../docsv2/queries/Grouping.md',
-        '../docsv2/queries/index.md': '../docsv2/queries/Queries.md',
-        '../docsv2/queries/layout.md': '../docsv2/queries/Layout.md',
-        '../docsv2/queries/limit.md': '../docsv2/queries/Limiting.md',
-        '../docsv2/queries/regular-expressions.md': '../docsv2/queries/Regular Expressions.md',
-        '../docsv2/queries/sorting.md': '../docsv2/queries/Sorting.md',
-        '../docsv2/quick-reference/index.md': '../docsv2/quick-reference/Quick Reference.md',
-        '../docsv2/reference/index.md': '../docsv2/reference/Reference.md',
-        '../docsv2/reference/status-collections/anuppuccin-theme.md': '../docsv2/reference/status-collections/AnuPpuccin Theme.md',
-        '../docsv2/reference/status-collections/aura-theme.md': '../docsv2/reference/status-collections/Aura Theme.md',
-        '../docsv2/reference/status-collections/ebullientworks-theme.md': '../docsv2/reference/status-collections/Ebullientworks Theme.md',
-        '../docsv2/reference/status-collections/index.md': '../docsv2/reference/status-collections/Status Collections.md',
-        '../docsv2/reference/status-collections/its-theme.md': '../docsv2/reference/status-collections/ITS Theme.md',
-        '../docsv2/reference/status-collections/minimal-theme.md': '../docsv2/reference/status-collections/Minimal Theme.md',
-        '../docsv2/reference/status-collections/slrvb-alternate-checkboxes-snippet.md': "../docsv2/reference/status-collections/SlRvb's Alternate Checkboxes.md",
-        '../docsv2/reference/status-collections/things-theme.md': '../docsv2/reference/status-collections/Things Theme.md'
-    }
+    with open(FILE_NAMES_MARKDOWN_FILE) as f:
+        renames = json.load(f)
 
     def get_new_file_name(self, path_without_file_extension: str) -> str:
         old_path = f'../docsv2/{path_without_file_extension}.md'
@@ -440,8 +385,7 @@ class SiteConverter:
 
     def rename_files(self) -> None:
         """
-        Walks through the filetree rooted at `root`.
-        Renames the file according to the dictionary in code above
+        Rename files from Jekyll convention to new one for Obsidian Public
         """
 
         for root, dirs, files in walk(self.source, topdown=True):
