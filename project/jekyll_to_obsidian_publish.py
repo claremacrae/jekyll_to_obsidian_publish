@@ -10,6 +10,8 @@ import argparse
 
 import frontmatter
 
+FILE_NAMES_MARKDOWN_FILE = os.path.join(os.path.dirname(__file__), 'markdown_files.json')
+
 EXTRACT_JEKYLL_INTERNAL_LINK_REGEXP = re.compile(
     r'\[([^{}]+)]\({{ site\.baseurl }}{% link ([a-z0-9-/]+)\.md %}(#[a-z-0-9]+)?\)')
 
@@ -428,8 +430,7 @@ class SiteConverter:
                     print(new_path)
                     file_renames[destination_path] = new_path
         # Save file_renames
-        this_dir = os.path.dirname(__file__)
-        with open(os.path.join(this_dir, 'markdown_files.json'), 'w') as f:
+        with open(FILE_NAMES_MARKDOWN_FILE, 'w') as f:
             f.write(json.dumps(file_renames, indent=4))
 
 
