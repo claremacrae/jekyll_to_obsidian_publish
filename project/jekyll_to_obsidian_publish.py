@@ -346,8 +346,8 @@ class SiteConverter:
                     if use_saved_filenames:
                         destination_path = self.rename_file_based_on_saved_filenames(destination_path)
                     else:
-                        destination_path = self.rename_file_based_on_title(destination_path, file_renames, page_converter,
-                                                                           source_path)
+                        destination_path = self.rename_file_based_on_title(destination_path, file_renames,
+                                                                           page_converter, source_path)
 
                     page_converter.convert_file(source_path, destination_path, decorate)
         # # The printout of file_renames gets pasted in to PageRenamer
