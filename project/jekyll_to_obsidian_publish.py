@@ -24,9 +24,27 @@ class PageRenamer:
         renames = json.load(f)
 
     def get_new_file_name(self, path_without_file_extension: str) -> str:
+        """
+        This converts a filename in a link
+        :param path_without_file_extension: 
+        :return: 
+        """
         old_path = f'../docsv2/{path_without_file_extension}.md'
         new_path = PageRenamer.renames[old_path]
         return os.path.basename(new_path).replace('.md', '')
+
+    @classmethod
+    def get_new_disk_file_name(cls, destination_path: str) -> str:
+        """
+        This converts a filename on disk
+        :param destination_path: 
+        :return: 
+        """
+        if destination_path in PageRenamer.renames:
+            return PageRenamer.renames[destination_path]
+        else:
+            # For cases like README.md with no TITLE in the file, so not saved in PageRenamer
+            return destination_path
 
 
 class PageConverter:
@@ -290,11 +308,7 @@ class SiteConverter:
                     page_converter.convert_file(source_path, destination_path, decorate)
 
     def rename_file_based_on_saved_filenames(self, destination_path: str) -> str:
-        if destination_path in PageRenamer.renames:
-            new_path = PageRenamer.renames[destination_path]
-        else:
-            # For cases like README.md with no TITLE in the file, so not saved in PageRenamer
-            new_path = destination_path
+        new_path = PageRenamer.get_new_disk_file_name(destination_path)
 
         print(new_path)
         if new_path != destination_path:
