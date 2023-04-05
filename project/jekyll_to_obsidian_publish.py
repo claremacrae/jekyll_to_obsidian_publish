@@ -286,7 +286,7 @@ class SiteConverter:
         self.source = source
         self.destination = destination
 
-    def convert(self, decorate: bool = True) -> None:
+    def convert_content(self, decorate: bool = True) -> None:
         """
         Walks through the filetree rooted at `root`.
         For each markdown file that it finds, it replaces a particular comment line with the corresponding template.
@@ -413,7 +413,7 @@ def main(argv: Sequence[str]) -> None:
     if args.rename_files:
         site_converter.rename_files()
     if args.convert_content:
-        site_converter.convert()
+        site_converter.convert_content()
         # Activate this to update the snippet file(s):
         # site_converter = SiteConverter('../docs-snippets', '../docs-snippets2')
         # site_converter.convert(False)
