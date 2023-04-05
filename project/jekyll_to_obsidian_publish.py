@@ -306,13 +306,12 @@ class SiteConverter:
 
                     page_converter.convert_file(source_path, destination_path, decorate)
 
-    def rename_file_based_on_saved_filenames(self, destination_path: str) -> str:
+    def rename_file_based_on_saved_filenames(self, destination_path: str) -> None:
         new_path = PageRenamer.get_new_disk_file_name(destination_path)
 
         print(new_path)
         if new_path != destination_path:
-            destination_path = self.git_rename_file(destination_path, new_path)
-        return destination_path
+            self.git_rename_file(destination_path, new_path)
 
     def git_rename_file(self, destination_path: str, new_path: str) -> str:
         git_command = f'git mv "{destination_path}" "{new_path}"'
