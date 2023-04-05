@@ -18,10 +18,10 @@ class PageRenamerTests(unittest.TestCase):
         def test_get_new_disk_file_name(destination: str, expected: str) -> None:
             assert (PageRenamer.get_new_disk_file_name(destination)) == expected
 
-        test_get_new_disk_file_name('../docsv2/README.md', '../docsv2/README.md')
-        test_get_new_disk_file_name('../docsv2/other-plugins/dataview.md', '../docsv2/other-plugins/Dataview.md')
-        test_get_new_disk_file_name('../docsv2/reference/status-collections/aura-theme.md',
-                                    '../docsv2/reference/status-collections/Aura Theme.md')
+        test_get_new_disk_file_name('README.md', 'README.md')
+        test_get_new_disk_file_name('other-plugins/dataview.md', 'other-plugins/Dataview.md')
+        test_get_new_disk_file_name('reference/status-collections/aura-theme.md',
+                                    'reference/status-collections/Aura Theme.md')
 
 
 class PageConverterTests(unittest.TestCase):

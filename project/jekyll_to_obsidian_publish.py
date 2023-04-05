@@ -29,7 +29,7 @@ class PageRenamer:
         :param path_without_file_extension: 
         :return: 
         """
-        old_path = f'../docsv2/{path_without_file_extension}.md'
+        old_path = f'{path_without_file_extension}.md'
         new_path = PageRenamer.renames[old_path]
         return os.path.basename(new_path).replace('.md', '')
 
@@ -407,7 +407,7 @@ def main(argv: Sequence[str]) -> None:
     )
     args = parser.parse_args(argv)
 
-    site_converter = SiteConverter('.', '../docsv2')
+    site_converter = SiteConverter('.', '.')
     if args.save_files_list:
         site_converter.create_json_files_list()
     if args.rename_files:
