@@ -8,6 +8,12 @@ from project.jekyll_to_obsidian_publish import PageConverter, PageRenamer
 
 
 class PageRenamerTests(unittest.TestCase):
+    def test_renames(self) -> None:
+        renames = PageRenamer.renames
+        print(type(renames))
+        for key in renames.keys():
+            print(type(key), key)
+
     def test_link_renamer(self) -> None:
         renamer = PageRenamer()
         assert renamer.get_new_link_file_name('index') == 'Introduction'
@@ -23,6 +29,28 @@ class PageRenamerTests(unittest.TestCase):
         test_get_new_disk_file_name('reference/status-collections/aura-theme.md',
                                     'reference/status-collections/Aura Theme.md')
 
+    def test_old_directory_listing(self) -> None:
+        expected_directories = [
+            '',
+            'advanced',
+            'getting-started',
+            'getting-started/statuses',
+            'how-to',
+            'installation',
+            'other-plugins',
+            'queries',
+            'quick-reference',
+            'reference',
+            'reference/status-collections']
+        directories = PageRenamer().get_all_old_directory_names()
+        assert directories == expected_directories
+
+    def test_directory_new_name(self) -> None:
+        assert PageRenamer.get_new_directory_name('') == ''
+        assert PageRenamer.get_new_directory_name('advanced') == 'Advanced'
+        assert PageRenamer.get_new_directory_name('getting-started') == 'Getting Started'
+        assert PageRenamer.get_new_directory_name('getting-started/statuses') == 'Getting Started/Statuses'
+        assert PageRenamer.get_new_directory_name('reference/status-collections') == 'Reference/Status Collections'
 
 class PageConverterTests(unittest.TestCase):
     def setUp(self) -> None:
@@ -57,6 +85,7 @@ class PageConverterTests(unittest.TestCase):
         with open(input_file) as f:
             content = f.read()
         self.verify_conversion_of_content(content, published_filename)
+
 
 class SiteConverterTests(unittest.TestCase):
     pass

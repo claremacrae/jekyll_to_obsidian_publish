@@ -5,7 +5,7 @@ import subprocess
 import sys
 from os import walk
 from os.path import join
-from typing import List, Any, Dict, Sequence
+from typing import List, Any, Dict, Sequence, Set
 import argparse
 
 import frontmatter
@@ -21,7 +21,7 @@ MetaData = Dict[str, Any]
 
 class PageRenamer:
     with open(FILE_NAMES_MARKDOWN_FILE) as f:
-        renames = json.load(f)
+        renames: Dict[str, str] = json.load(f)
 
     def get_new_link_file_name(self, path_without_file_extension: str) -> str:
         """
@@ -45,6 +45,20 @@ class PageRenamer:
         else:
             # For cases like README.md with no TITLE in the file, so not saved in PageRenamer
             return destination_path
+
+    def get_all_old_directory_names(self) -> List[str]:
+        directories: Set[str] = set()
+        old_name: object
+        for old_name in PageRenamer.renames.keys():
+            d = os.path.dirname(old_name)
+            directories.add(d)
+        return sorted(list(directories))
+
+    @classmethod
+    def get_new_directory_name(cls, old_directory: str) -> str:
+        if old_directory == '':
+            return old_directory
+        return old_directory.replace('-', ' ').title()
 
 
 class PageConverter:
@@ -388,6 +402,23 @@ class SiteConverter:
                     destination_path = self.get_destination_path(source_path)
                     self.rename_file_based_on_saved_filenames(destination_path)
 
+    def rename_directories(self) -> None:
+        """
+        Rename directories from Jekyll convention to new one for Obsidian Public
+        """
+
+        # Get a list of unique directories from the JSON
+        directories = PageRenamer().get_all_old_directory_names()
+
+        # For each directory
+        for old_directory in directories:
+            # Get its new name
+            new_directory = PageRenamer.get_new_directory_name(old_directory)
+            if old_directory == new_directory:
+                continue
+            # Rename it
+            print(f'TODO: Rename {old_directory} to {new_directory}')
+
 
 def main(argv: Sequence[str]) -> None:
     parser = argparse.ArgumentParser(
@@ -402,6 +433,10 @@ def main(argv: Sequence[str]) -> None:
         help="Rename markdown files from Jekyll file names to their titles"
     )
     parser.add_argument(
+        "--rename-directories", action="store_true",
+        help="Rename markdown directories from Jekyll file names to their titles"
+    )
+    parser.add_argument(
         "--convert-content", action="store_true",
         help="Convert docs content from jekyll markdown to Obsidian Publish content"
     )
@@ -412,6 +447,8 @@ def main(argv: Sequence[str]) -> None:
         site_converter.create_json_files_list()
     if args.rename_files:
         site_converter.rename_files()
+    if args.rename_directories:
+        site_converter.rename_directories()
     if args.convert_content:
         site_converter.convert_content()
         # Activate this to update the snippet file(s):
