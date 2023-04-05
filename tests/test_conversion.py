@@ -7,18 +7,20 @@ from approvaltests.approvals import verify
 from project.jekyll_to_obsidian_publish import PageConverter, PageRenamer
 
 
-class ConversionTests(unittest.TestCase):
-    def setUp(self) -> None:
-        pass
-        # set_default_reporter(None)  # Use the first difftool found on your system
-        # self.reporter = GenericDiffReporterFactory().get("DiffMerge")
-        # Download DiffMerge at https://sourcegear.com/diffmerge/
-
+class PageRenamerTests(unittest.TestCase):
     def test_page_renamer(self) -> None:
         renamer = PageRenamer()
         assert renamer.get_new_link_file_name('index') == 'Introduction'
         assert renamer.get_new_link_file_name('reference/index') == 'Reference'
         assert renamer.get_new_link_file_name('getting-started/statuses/status-types') == 'Status Types'
+
+
+class PageConverterTests(unittest.TestCase):
+    def setUp(self) -> None:
+        pass
+        # set_default_reporter(None)  # Use the first difftool found on your system
+        # self.reporter = GenericDiffReporterFactory().get("DiffMerge")
+        # Download DiffMerge at https://sourcegear.com/diffmerge/
 
     def test_info_conversion(self) -> None:
         content = f'''{{: .info }}
@@ -46,3 +48,6 @@ class ConversionTests(unittest.TestCase):
         with open(input_file) as f:
             content = f.read()
         self.verify_conversion_of_content(content, published_filename)
+
+class SiteConverterTests(unittest.TestCase):
+    pass
