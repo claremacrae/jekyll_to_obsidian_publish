@@ -480,25 +480,3 @@ In this case, that would be `2022-04-30`.
 
 From then on, the due date will be based on the 30th day of the month, unless changed manually.
 So the next occurrence would happen on `2022-07-30`, even though July has 31 days.
-
----
-
-## View this page on the old documentation site
-
-> [!Info] Request for feedback
-> This page is an experimental migration of the Tasks user docs to Obsidian Publish. When the conversion is good enough, this will become the live site.
->
-> For comparison, you can view [this page on the old documentation site](https://obsidian-tasks-group.github.io/obsidian-tasks/getting-started/statuses/).
-
-> [!Bug] Please report any problems
->
-> We are keeping a list of [[migration#Current Status and Known Problems|Known Problems]] with the conversion.
->
-> If you notice any other problems in this page, compared to [the old one](https://obsidian-tasks-group.github.io/obsidian-tasks/getting-started/statuses/), please let us know in [#1706](https://github.com/obsidian-tasks-group/obsidian-tasks/issues/1706#issuecomment-1454284835).
->
-> Please include:
->
-> - The URL of this problem page
-> - A screenshot of the problem.
->
-> Thank you!
