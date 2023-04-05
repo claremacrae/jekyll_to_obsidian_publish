@@ -344,9 +344,7 @@ class SiteConverter:
                 print(file)
                 if file.endswith(".md"):
                     source_path = self.get_source_path(root, file)
-                    destination_path = join(self.destination, source_path)
-                    destination_path = os.path.normpath(destination_path)
-                    print(destination_path)
+                    destination_path = self.get_destination_path(source_path)
 
                     if use_saved_filenames:
                         destination_path = self.rename_file_based_on_saved_filenames(destination_path)
@@ -411,9 +409,7 @@ class SiteConverter:
                 print(file)
                 if file.endswith(".md"):
                     source_path = self.get_source_path(root, file)
-                    destination_path = join(self.destination, source_path)
-                    destination_path = os.path.normpath(destination_path)
-                    print(destination_path)
+                    destination_path = self.get_destination_path(source_path)
 
                     # Experiment with renaming file to match title in metadata
                     content = page_converter.read_file(source_path)
@@ -432,6 +428,12 @@ class SiteConverter:
     def get_source_path(self, root: str, file: str) -> str:
         source_path = join(root, file)
         return source_path
+
+    def get_destination_path(self, source_path: str) -> str:
+        destination_path = join(self.destination, source_path)
+        destination_path = os.path.normpath(destination_path)
+        print(destination_path)
+        return destination_path
 
     def filter_tree_args(self, dirs: List[str], files: List[str]) -> None:
         # Exclude directories and files
