@@ -302,8 +302,7 @@ class SiteConverter:
                 if file.endswith(".md"):
                     source_path = self.get_source_path(root, file)
                     destination_path = self.get_destination_path(source_path)
-
-                    destination_path = self.rename_file_based_on_saved_filenames(destination_path)
+                    destination_path = PageRenamer.get_new_disk_file_name(destination_path)
 
                     page_converter.convert_file(source_path, destination_path, decorate)
 
@@ -388,16 +387,6 @@ class SiteConverter:
                     self.rename_file_based_on_saved_filenames(destination_path)
 
 
-
-def convert_markdown() -> None:
-    site_converter = SiteConverter('.', '../docsv2')
-    site_converter.convert()
-
-    # Activate this to update the snippet file(s):
-    # site_converter = SiteConverter('../docs-snippets', '../docs-snippets2')
-    # site_converter.convert(False)
-
-
 def main(argv: Sequence[str]) -> None:
     parser = argparse.ArgumentParser(
         description="Convert Tasks plugin docs from Jekyll to Obsidian Publish"
@@ -410,6 +399,10 @@ def main(argv: Sequence[str]) -> None:
         "--rename-files", action="store_true",
         help="Rename markdown files from Jekyll file names to their titles"
     )
+    parser.add_argument(
+        "--convert-content", action="store_true",
+        help="Convert docs content from jekyll markdown to Obsidian Publish content"
+    )
     args = parser.parse_args(argv)
 
     site_converter = SiteConverter('.', '../docsv2')
@@ -417,8 +410,11 @@ def main(argv: Sequence[str]) -> None:
         site_converter.create_json_files_list()
     elif args.rename_files:
         site_converter.rename_files()
-    else:
-        convert_markdown()
+    elif args.convert_content:
+        site_converter.convert()
+        # Activate this to update the snippet file(s):
+        # site_converter = SiteConverter('../docs-snippets', '../docs-snippets2')
+        # site_converter.convert(False)
 
 
 if __name__ == '__main__':
