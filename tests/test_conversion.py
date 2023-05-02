@@ -75,8 +75,9 @@ class PageConverterTests(unittest.TestCase):
 
     def test_adding_redirect(self) -> None:
         renamer = PageRenamer()
-        assert renamer.get_new_url(
-            'getting-started/recurring-tasks.md') == 'https://publish.obsidian.md/tasks/Getting+Started/Recurring+Tasks'
+        assert renamer.get_new_url_path('index.md') == 'Introduction'
+        assert renamer.get_new_url_path('getting-started/recurring-tasks.md') == 'Getting+Started/Recurring+Tasks'
+        assert renamer.get_new_url_path('reference/status-collections/aura-theme.md') == 'Reference/Status+Collections/Aura+Theme'
 
     # ------------------------------------------------------------------------------------------------
     # Helper functions

@@ -60,7 +60,7 @@ class PageRenamer:
             return old_directory
         return old_directory.replace('-', ' ').title()
 
-    def get_new_url(self, source_path: str) -> str:
+    def get_new_url_path(self, source_path: str) -> str:
         v1_no_extension = source_path.replace('.md', '')
 
         d1 = os.path.split(source_path)[0]
@@ -68,11 +68,13 @@ class PageRenamer:
 
         f1 = self.get_new_link_file_name(v1_no_extension)
 
-        u1 = d2 + '/' + f1
+        if len(d2) > 0:
+            u1 = d2 + '/' + f1
+        else:
+            u1 = f1
         u2 = u1.replace(' ', '+')
-        u3 = 'https://publish.obsidian.md/tasks/' + u2
 
-        return u3
+        return u2
 
 
 class PageConverter:
