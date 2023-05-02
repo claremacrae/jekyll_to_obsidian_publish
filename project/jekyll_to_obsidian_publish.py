@@ -60,6 +60,20 @@ class PageRenamer:
             return old_directory
         return old_directory.replace('-', ' ').title()
 
+    def get_new_url(self, source_path: str) -> str:
+        v1_no_extension = source_path.replace('.md', '')
+
+        d1 = os.path.split(source_path)[0]
+        d2 = PageRenamer.get_new_directory_name(d1)
+
+        f1 = self.get_new_link_file_name(v1_no_extension)
+
+        u1 = d2 + '/' + f1
+        u2 = u1.replace(' ', '+')
+        u3 = 'https://publish.obsidian.md/tasks/' + u2
+
+        return u3
+
 
 class PageConverter:
     def convert_file(self, source_path: str, destination_path: str, decorate: bool) -> None:
@@ -437,6 +451,17 @@ class SiteConverter:
             # Note that the two ones renaming sub-directories were first manually edited to
             # apply the capitalisation of the parent directory
 
+    def add_links_to_new_site(self) -> None:
+        for root, dirs, files in walk(self.source, topdown=True):
+            self.filter_tree_args(dirs, files)
+
+            for file in files:
+                print(file)
+                if file.endswith(".md"):
+                    source_path = self.get_source_path(root, file)
+                    destination_path = self.get_destination_path(source_path)
+                    self.rename_file_based_on_saved_filenames(destination_path)
+
 
 def main(argv: Sequence[str]) -> None:
     parser = argparse.ArgumentParser(
@@ -458,6 +483,10 @@ def main(argv: Sequence[str]) -> None:
         "--convert-content", action="store_true",
         help="Convert docs content from jekyll markdown to Obsidian Publish content"
     )
+    parser.add_argument(
+        "--add-link-to-new-site", action="store_true",
+        help="Add to the old documentation a link to the same page on the new site"
+    )
     args = parser.parse_args(argv)
 
     site_converter = SiteConverter('.', '.')
@@ -472,6 +501,8 @@ def main(argv: Sequence[str]) -> None:
         # Activate this to update the snippet file(s):
         # site_converter = SiteConverter('../docs-snippets', '../docs-snippets2')
         # site_converter.convert(False)
+    if args.add_link_to_new_site:
+        site_converter.add_links_to_new_site()
 
 
 if __name__ == '__main__':

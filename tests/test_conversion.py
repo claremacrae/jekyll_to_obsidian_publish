@@ -1,3 +1,4 @@
+import os.path
 import unittest
 from pathlib import Path
 
@@ -72,6 +73,11 @@ class PageConverterTests(unittest.TestCase):
     def test_sample_front_page(self) -> None:
         self.verify_conversion_of_test_file_content('./sample_front_page.md', './index.md')
 
+    def test_adding_redirect(self) -> None:
+        renamer = PageRenamer()
+        assert renamer.get_new_url(
+            'getting-started/recurring-tasks.md') == 'https://publish.obsidian.md/tasks/Getting+Started/Recurring+Tasks'
+
     # ------------------------------------------------------------------------------------------------
     # Helper functions
     # ------------------------------------------------------------------------------------------------
@@ -90,3 +96,4 @@ class PageConverterTests(unittest.TestCase):
 
 class SiteConverterTests(unittest.TestCase):
     pass
+    # def test_add_links_to_new_site(self):
