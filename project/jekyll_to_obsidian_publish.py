@@ -464,15 +464,21 @@ class SiteConverter:
             # apply the capitalisation of the parent directory
 
     def add_links_to_new_site(self) -> None:
+        converter = PageConverter()
         for root, dirs, files in walk(self.source, topdown=True):
             self.filter_tree_args(dirs, files)
 
             for file in files:
                 print(file)
+                if file == 'README.md':
+                    continue
+
                 if file.endswith(".md"):
                     source_path = self.get_source_path(root, file)
-                    new_content = self.get_redirect_test(source_path)
-                    # TODO Rewrite file containing only redirect text
+                    source_path = source_path.replace('./', '')
+                    new_content = converter.get_redirect_text(source_path)
+                    with open(source_path, 'w') as f:
+                        f.write(new_content)
 
 
 def main(argv: Sequence[str]) -> None:
@@ -496,7 +502,7 @@ def main(argv: Sequence[str]) -> None:
         help="Convert docs content from jekyll markdown to Obsidian Publish content"
     )
     parser.add_argument(
-        "--add-link-to-new-site", action="store_true",
+        "--add-redirect-to-new-site", action="store_true",
         help="Add to the old documentation a link to the same page on the new site"
     )
     args = parser.parse_args(argv)
@@ -513,7 +519,7 @@ def main(argv: Sequence[str]) -> None:
         # Activate this to update the snippet file(s):
         # site_converter = SiteConverter('../docs-snippets', '../docs-snippets2')
         # site_converter.convert(False)
-    if args.add_link_to_new_site:
+    if args.add_redirect_to_new_site:
         site_converter.add_links_to_new_site()
 
 
