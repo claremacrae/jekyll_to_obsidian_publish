@@ -281,6 +281,16 @@ class PageConverter:
         relative_path = relative_path.replace('.md', '/')
         old_url = f'https://obsidian-tasks-group.github.io/obsidian-tasks/{relative_path}'
         return content
+
+    def get_redirect_text(self, source_path: str) -> str:
+        renamer = PageRenamer()
+        return f'''---
+redirect_to:
+- https://publish.obsidian.md/tasks/{renamer.get_new_url_path(source_path)}
+---
+'''
+
+
 #         return content + f'''
 # ---
 # 
@@ -461,8 +471,8 @@ class SiteConverter:
                 print(file)
                 if file.endswith(".md"):
                     source_path = self.get_source_path(root, file)
-                    destination_path = self.get_destination_path(source_path)
-                    self.rename_file_based_on_saved_filenames(destination_path)
+                    new_content = self.get_redirect_test(source_path)
+                    # TODO Rewrite file containing only redirect text
 
 
 def main(argv: Sequence[str]) -> None:

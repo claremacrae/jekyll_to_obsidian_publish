@@ -54,6 +54,13 @@ class PageRenamerTests(unittest.TestCase):
         assert PageRenamer.get_new_directory_name('reference') == 'Reference'
         assert PageRenamer.get_new_directory_name('reference/status-collections') == 'Reference/Status Collections'
 
+    def test_get_new_url_path(self) -> None:
+        renamer = PageRenamer()
+        assert renamer.get_new_url_path('index.md') == 'Introduction'
+        assert renamer.get_new_url_path('getting-started/recurring-tasks.md') == 'Getting+Started/Recurring+Tasks'
+        assert renamer.get_new_url_path('reference/status-collections/aura-theme.md') == 'Reference/Status+Collections/Aura+Theme'
+
+
 class PageConverterTests(unittest.TestCase):
     def setUp(self) -> None:
         pass
@@ -74,10 +81,10 @@ class PageConverterTests(unittest.TestCase):
         self.verify_conversion_of_test_file_content('./sample_front_page.md', './index.md')
 
     def test_adding_redirect(self) -> None:
-        renamer = PageRenamer()
-        assert renamer.get_new_url_path('index.md') == 'Introduction'
-        assert renamer.get_new_url_path('getting-started/recurring-tasks.md') == 'Getting+Started/Recurring+Tasks'
-        assert renamer.get_new_url_path('reference/status-collections/aura-theme.md') == 'Reference/Status+Collections/Aura+Theme'
+        converter = PageConverter()
+        x = converter.get_redirect_text('getting-started/recurring-tasks.md')
+        options = Options().for_file.with_extension(".md")
+        verify(x, options=options)
 
     # ------------------------------------------------------------------------------------------------
     # Helper functions
